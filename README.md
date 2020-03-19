@@ -4,7 +4,7 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# 1️⃣ Title of project goes here
+# 1️⃣ SF MTA Data Analysis
 
 You can find the project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
 
@@ -32,15 +32,13 @@ You can find the project at [🚫URL NAME GOES HERE](🚫copy and paste URL here
 ## Project Overview
 
 
-1️⃣ [Trello Board](🚫add link to trello board here)
+1️⃣ [Trello Board] https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis (LMK if this link isn't correct).
 
-1️⃣ [Product Canvas](🚫add link to product canvas here)
+1️⃣ [Product Canvas] https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0 (LMK if this should be the RC).
 
-🚫 Replace lorem ipsum with a description of your project
+### Project Description:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Create a publicly available database of historical locations of bus and rail cars. Provide near real time analysis of travel times from major travel corridors. Give citizens, oversight committee members, and SFMTA staff accurate and timely historical data, along with statistics and analysis, to make informed decisions to measure system wide improvements.
 
 🚫  delete if front end is not applicable to your project
 
