@@ -19,10 +19,10 @@ file = open('sfmta-api/route_paths.json')
 path_df = pd.read_json(file, orient='split')
 
 config = {
-  'user': "Admin-Jordan",
-  'password': "Panduhhz!1",
-  'host': "68.98.3.20",
-  'database': "lambdalabs22",
+  'user': "USER",
+  'password': "PASSWORD",
+  'host': "HOST",
+  'database': "DATABASE",
   'raise_on_warnings': True
 }
 
