@@ -6,7 +6,7 @@
 
 # 1️⃣ SF MTA Data Analysis
 
-You can find the project at [🚫URL NAME GOES HERE](🚫copy and paste URL here).
+You can find the project at https://sfmta-test.heroku.com/
 
 ## 5️⃣ Contributors
 
@@ -19,9 +19,6 @@ You can find the project at [🚫URL NAME GOES HERE](🚫copy and paste URL here
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) |
 
 
-
-🚫 5️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project
-
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
@@ -32,21 +29,23 @@ You can find the project at [🚫URL NAME GOES HERE](🚫copy and paste URL here
 ## Project Overview
 
 
-1️⃣ [Trello Board] https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis (LMK if this link isn't correct).
+1️⃣ [Trello Board] https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis
 
-1️⃣ [Product Canvas] https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0 (LMK if this should be the RC).
+1️⃣ [Product Canvas] https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0
 
 ### Project Description:
 
 Create a publicly available database of historical locations of bus and rail cars. Provide near real time analysis of travel times from major travel corridors. Give citizens, oversight committee members, and SFMTA staff accurate and timely historical data, along with statistics and analysis, to make informed decisions to measure system wide improvements.
-
-🚫  delete if front end is not applicable to your project
 
 1️⃣ [Deployed Front End](🚫add link to deployed app here)
 
 ### Tech Stack
 
 🚫 List all of the languages, frameworks, services, etc used here.
+- Python
+- MySQL
+- Pandas
+- 
 
 ### 2️⃣ Predictions
 
