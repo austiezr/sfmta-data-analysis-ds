@@ -6,11 +6,9 @@
 
 # SF MTA Data Analysis
 
-Take a look at our product here 👉🏼[🚎](https://master.d3j9ctmbednoov.amplifyapp.com)
+Take a look at our product here 👉🏼 [🚎](https://master.d3j9ctmbednoov.amplifyapp.com)
 
 ## Contributors
-
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
 
 |                                       [Agustin Cody Vargas](https://github.com/AVData/)                        |                                       [Jordan Ireland](https://github.com/Jordan-Ireland/)                                        |                                       [Mathias Ragnarson Skreden](https://github.com/skredenmathias/)                                        |                                                            
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------:  |
