@@ -4,11 +4,11 @@
 
 🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
 
-# 1️⃣ SF MTA Data Analysis
+# SF MTA Data Analysis
 
-You can find the project [here](https://master.d3j9ctmbednoov.amplifyapp.com)
+Take a look at our product here 👉🏼[🚎](https://master.d3j9ctmbednoov.amplifyapp.com)
 
-## 3️⃣ Contributors
+## Contributors
 
 🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
 
@@ -29,25 +29,26 @@ You can find the project [here](https://master.d3j9ctmbednoov.amplifyapp.com)
 ## Project Overview
 
 
-1️⃣ [Trello Board] https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis
+[<img src="https://d2k1ftgv7pobq7.cloudfront.net/meta/u/res/images/brand-assets/Logos/0099ec3754bf473d2bbf317204ab6fea/trello-logo-blue.png" width="65"> Board](https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis)
 
-1️⃣ [Product Canvas] https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0
+[Product Canvas👩‍🎨](https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0)
 
 ### Project Description:
 
 Create a publicly available database of historical locations of bus and rail cars. Provide near real time analysis of travel times from major travel corridors. Give citizens, oversight committee members, and SFMTA staff accurate and timely historical data, along with statistics and analysis, to make informed decisions to measure system wide improvements.
 
-1️⃣ [Deployed Front End]
-
-https://master.d3j9ctmbednoov.amplifyapp.com/
+[The Front End](https://master.d3j9ctmbednoov.amplifyapp.com/)
 
 ### Tech Stack
 
-🚫 List all of the languages, frameworks, services, etc used here.
-- Python
-- MySQL
-- Pandas
-- 
+Languages, frameworks, services, etc.
+- [Python](https://www.python.org)
+- [MySQL](https://www.mysql.com)
+- [AWS RDS](https://aws.amazon.com/rds/)
+- [Pandas](https://pandas.pydata.org)
+- [Plotly](https://plotly.com/python/)
+- [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)
+- [Jupyter Lab](https://jupyter.org)
 
 ### 2️⃣ Predictions
 
