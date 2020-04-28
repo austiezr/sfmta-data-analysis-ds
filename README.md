@@ -33,7 +33,7 @@ Take a look at our product here 👉🏼 [🚎](https://master.d3j9ctmbednoov.am
 
 ### Project Description:
 
-Create a publicly available database of historical locations of bus and rail cars. Provide near real time analysis of travel times from major travel corridors. Give citizens, oversight committee members, and SFMTA staff accurate and timely historical data, along with statistics and analysis, to make informed decisions to measure system wide improvements.
+This project began as a greenfield project proposed by [Jarie Bolander](https://www.linkedin.com/in/jariebolander/) in colaboration with Lambda School Labs students.  The aim was, and continues to be to provide near real time analysis of travel times from major travel corridors. Give citizens, oversight committee members, and SFMTA staff accurate and timely historical data, along with statistics and analysis, to make informed decisions to measure system wide improvements.
 
 [The Front End](https://master.d3j9ctmbednoov.amplifyapp.com/)
 
