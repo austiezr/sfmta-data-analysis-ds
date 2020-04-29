@@ -26,7 +26,6 @@ Take a look at our product here 👉🏼 [🚎](https://master.d3j9ctmbednoov.am
 
 ## Project Overview
 
-
 [<img src="https://d2k1ftgv7pobq7.cloudfront.net/meta/u/res/images/brand-assets/Logos/0099ec3754bf473d2bbf317204ab6fea/trello-logo-blue.png" width="65"> Board](https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis)
 
 [Product Canvas👩‍🎨](https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0)
@@ -39,7 +38,6 @@ This project began as a greenfield project proposed by [Jarie Bolander](https://
 
 ### Tech Stack
 
-Languages, frameworks, services, etc.
 - [Python](https://www.python.org)
 - [MySQL](https://www.mysql.com)
 - [AWS RDS](https://aws.amazon.com/rds/)
@@ -48,9 +46,9 @@ Languages, frameworks, services, etc.
 - [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)
 - [Jupyter Lab](https://jupyter.org)
 
-### 2️⃣ Predictions
+### Predictions
 
-🚫 Describe your models here
+Considering the complexity, volume, and feature engineering required for this project, a significant amount of time was invested in thinking about potential approaches to the analysis, and to the scaling of newly constructed dataframes.  If you take a look at the notebooks under 'Data Sources'  you can see the directions and trajectory of the analysis.  Moving forward, the predictions will come in the form of ETAs, as well as bunching and gapping.  
 
 ### 2️⃣ Explanatory Variables
 
