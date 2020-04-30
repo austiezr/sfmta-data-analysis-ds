@@ -48,15 +48,15 @@ This project began as a greenfield project proposed by [Jarie Bolander](https://
 
 ### Predictions
 
-Considering the complexity, volume, and feature engineering required for this project, a significant amount of time was invested in thinking about potential approaches to the analysis, and to the scaling of newly constructed dataframes.  If you take a look at the notebooks under 'Data Sources'  you can see the directions and trajectory of the analysis.  Moving forward, the predictions will come in the form of ETAs, as well as bunching and gapping.  
+Considering the complexity, volume, and feature engineering required for this project, a significant amount of time was invested in thinking about potential approaches to the analysis, and to the scaling of newly constructed dataframes; as you navigate through this README file, you'll understand what is meant.  If you take a look at the notebooks under 'Data Sources'  you'll have more calrity in the directions and trajectory of the analysis.  Moving forward, the predictions will come in the form of ETAs, as well as bunching and gapping.  
 
-### 2️⃣ Explanatory Variables
+### Explanatory Variables
 
--   Explanatory Variable 1
--   Explanatory Variable 2
--   Explanatory Variable 3
--   Explanatory Variable 4
--   Explanatory Variable 5
+-   [Explanatory Variable 1: Route 1 Analysis]()
+-   [Explanatory Variable 2]()
+-   [Explanatory Variable 3]()
+-   [Explanatory Variable 4]()
+-   [Explanatory Variable 5]()
 
 ### Data Sources
 🚫  Add to or delete souce links as needed for your project
