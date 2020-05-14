@@ -1,3 +1,5 @@
+# helper class to access the Restbus API
+
 import requests
 import json
 

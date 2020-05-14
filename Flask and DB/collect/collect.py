@@ -1,3 +1,5 @@
+# Main data collection script
+
 import argparse
 import requests
 import json

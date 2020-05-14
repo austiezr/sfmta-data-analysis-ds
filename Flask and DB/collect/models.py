@@ -1,3 +1,5 @@
+# defines the database schema
+
 import datetime
 import mysql.connector
 
