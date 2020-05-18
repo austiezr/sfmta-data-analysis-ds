@@ -1,3 +1,5 @@
+# Flask app providing API links for the web front end to use
+
 from flask import Flask, url_for, request
 import json
 import pandas as pd
@@ -30,6 +32,7 @@ config = {
 def index():
     return "Hello"
 
+# returns a JSON of raw vehicle location data, given a route id
 @app.route('/real-time', methods=['GET'])
 def get_real_time():
     route_id = request.args.get('id', default=None)
@@ -82,19 +85,20 @@ def get_real_time():
 
     return json.dumps({'vehicles': vehicles, 'lastcall': last_call})
 
-
+# returns the output of create_graph() in JSON format
 @app.route("/all-routes", methods=['GET'])
 def all_routes():
     traces, layout, names, types = create_graph()
     return json.dumps({"traces": traces, 'layout': layout, 'names': names, 'types': types}, cls=pu.PlotlyJSONEncoder)
 
-
+# this route returns the "type" argument passed to it
+# possibly unfinished
 @app.route("/type-map", methods=['GET'])
 def type_routes():
     route_type = request.args.get('type', type=str)
     return route_type
 
-
+# creates the plotly map of San Francisco showing a specific route
 def create_graph():
     traces = []
     colors = {'bus': 'blue', 'rapid': 'blue', 'rail': 'red',
@@ -170,6 +174,7 @@ def create_graph():
 
     return traces, layout, names, types
 
+# gets a list of lat/lon coordinates from the mapbox api
 def create_route(coords):
     """Coords: start_lon, start_lat, end_lon, end_lat"""
     """Get route JSON."""
