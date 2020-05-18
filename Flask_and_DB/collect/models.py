@@ -1,7 +1,19 @@
 # defines the database schema
 
 # import datetime
-import mysql.connector
+import psycopg2 as pg
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+creds = {
+  'user': os.environ.get('USER'),
+  'password': os.environ.get('PASSWORD'),
+  'host': os.environ.get('HOST'),
+  'dbname': os.environ.get('DATABASE'),
+  'port': os.environ.get('PORT')
+}
 
 
 def Location(datetime, rid, vid, secs,
@@ -19,14 +31,7 @@ def Location(datetime, rid, vid, secs,
 
 
 def init_database():
-    user = 'SkredenMathias'
-    password = 'dZ4P{Yr{6a'
-    host = '68.98.3.20'
-    db = 'lambdalabs22'
-    con = mysql.connector.connect(user=user,
-                                  password=password,
-                                  host=host,
-                                  database=db)
+    con = pg.connect(**creds)
     global con
 
 

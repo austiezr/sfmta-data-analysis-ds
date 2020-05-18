@@ -6,30 +6,33 @@ import json
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.utils as pu
-from decouple import config as conf
 from flask_cors import CORS
 from datetime import datetime
 import psycopg2 as pg
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 CORS(app)
 
-token = conf('MAPBOX_TOKEN')
-file = open('schedule_data.json')
+mapbox_token = os.environ.get('MAPBOX_TOKEN')
+file = open('jordan-sfmta-api/schedule_data.json')
 schedule_data = pd.read_json(file, orient='split')
-file = open('route_data_new.json')
+file = open('jordan-sfmta-api/route_data_new.json')
 new_route_info = pd.read_json(file, orient='split')
-file = open('route_paths.json')
+file = open('jordan-sfmta-api/route_paths.json')
 path_df = pd.read_json(file, orient='split')
 
 # credentials for DB connection
-config = {
-  'user': "USER",
-  'password': "PASSWORD",
-  'host': "HOST",
-  'dbname': "DATABASE",
+creds = {
+  'user': os.environ.get('USER'),
+  'password': os.environ.get('PASSWORD'),
+  'host': os.environ.get('HOST'),
+  'dbname': os.environ.get('DATABASE')
 }
 
 
@@ -41,11 +44,11 @@ def index():
 # returns a JSON of raw vehicle location data, given a route id
 @app.route('/real-time', methods=['GET'])
 def get_real_time():
-    route_id = request.args.get('id', default=None)
+    route_id = 1
     last_call = request.args.get('last', default=None)
 
     vehicles = {'rid': [], 'vid': [], 'lat': [], 'lng': [], 'dir': []}
-    cnx = pg.connect(**config)
+    cnx = pg.connect(**creds)
     cursor = cnx.cursor()
 
     # if last call is none, then return all buses on that route
