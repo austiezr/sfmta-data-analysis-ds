@@ -9,7 +9,7 @@ This folder contains a Flask app that pulls data from the AWS database and serve
   - 86 rows
   - columns: route_id, route_name, type, lat, lon, stopId, tag, title, dir
 - route_paths.json
-  - Dataframe of laitude/longitude coordinates describing each bus route
+  - Dataframe of latitude/longitude coordinates describing each bus route
   - 86 rows
   - columns: tag (rout id), path, name
 - schedule_data.json

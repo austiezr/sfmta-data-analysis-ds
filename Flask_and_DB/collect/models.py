@@ -1,14 +1,17 @@
 # defines the database schema
 
-import datetime
+# import datetime
 import mysql.connector
 
 
-def Location(datetime, rid, vid, secs, kph, head, lat, lon, dir, timeInSec,
-             timeInMin, timeInHour, year, doy, dow):
-    sql = "INSERT INTO location (datetime, rid, vid, secs, kph, head, lat," \
-          "lon, dir, timeInSec, timeInMin, timeInHour, year, doy, dow) VALUES" \
-          "(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+def Location(datetime, rid, vid, secs,
+             kph, head, lat, lon,
+             dir, timeInSec, timeInMin, timeInHour,
+             year, doy, dow):
+    sql = "INSERT INTO location " \
+          "(datetime, rid, vid, secs, kph, head, lat," \
+          "lon, dir, timeInSec, timeInMin, timeInHour, year, doy, dow) " \
+          "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = con.cursor()
     cursor.execute(sql, (datetime, rid, vid, secs, kph, head, lat, lon, dir,
                          timeInSec, timeInMin, timeInHour, year, doy, dow))
@@ -20,10 +23,13 @@ def init_database():
     password = 'dZ4P{Yr{6a'
     host = '68.98.3.20'
     db = 'lambdalabs22'
-    global con
-    con = mysql.connector.connect(user=user, password=password, host=host,
+    con = mysql.connector.connect(user=user,
+                                  password=password,
+                                  host=host,
                                   database=db)
-#
+    global con
+
+
 #
 #
 # class Location(db.Model):
@@ -52,5 +58,7 @@ def init_database():
 #     db.create_all()
 #     db.session.commit()
 #
+
+
 if __name__ == '__main__':
     init_database()
