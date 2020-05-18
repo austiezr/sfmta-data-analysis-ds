@@ -44,7 +44,7 @@ def index():
 # returns a JSON of raw vehicle location data, given a route id
 @app.route('/real-time', methods=['GET'])
 def get_real_time():
-    route_id = 1
+    route_id = request.args.get('id', default=None)
     last_call = request.args.get('last', default=None)
 
     vehicles = {'rid': [], 'vid': [], 'lat': [], 'lng': [], 'dir': []}
@@ -200,7 +200,7 @@ def create_graph():
         mapbox_zoom=11.25,
         mapbox_center={"lat": 37.76, "lon": -122.4},
         mapbox={
-            'accesstoken': token},
+            'accesstoken': mapbox_token},
         showlegend=False,
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
         width=800,
@@ -222,7 +222,7 @@ def create_route(coords):
 
     params = {
         'geometries': 'geojson',
-        'access_token': token
+        'access_token': mapbox_token
     }
 
     req = requests.get(url, params=params)
