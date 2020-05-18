@@ -14,6 +14,9 @@ from flask import Flask
 # from flask_sqlalchemy import SQLAlchemy
 from .restbus import RestBus
 from .models import Location, init_database
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 # TODO: Set up ENV variable
@@ -28,14 +31,13 @@ app = Flask(__name__)
 INTERVAL = 60
 
 # default_level=logging.INFO
-# env_key='LOG_CFG'
 
 
 def setup_logging(default_path='logging.json',
-                  default_level=logging.info, env_key='LOG_CFG'):
+                  default_level=logging.info):
     """Setup logging configuration """
     path = default_path
-    value = os.getenv(env_key, None)
+    value = os.environ.get('ENV_KEY')
     if value:
         path = value
     if os.path.exists(path):

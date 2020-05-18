@@ -6,30 +6,33 @@ import json
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.utils as pu
-from decouple import config as conf
 from flask_cors import CORS
 from datetime import datetime
 import psycopg2 as pg
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
 CORS(app)
 
-token = conf('MAPBOX_TOKEN')
-file = open('schedule_data.json')
+mapbox_token = os.environ.get('MAPBOX_TOKEN')
+file = open('jordan-sfmta-api/schedule_data.json')
 schedule_data = pd.read_json(file, orient='split')
-file = open('route_data_new.json')
+file = open('jordan-sfmta-api/route_data_new.json')
 new_route_info = pd.read_json(file, orient='split')
-file = open('route_paths.json')
+file = open('jordan-sfmta-api/route_paths.json')
 path_df = pd.read_json(file, orient='split')
 
 # credentials for DB connection
-config = {
-  'user': "USER",
-  'password': "PASSWORD",
-  'host': "HOST",
-  'dbname': "DATABASE",
+creds = {
+  'user': os.environ.get('USER'),
+  'password': os.environ.get('PASSWORD'),
+  'host': os.environ.get('HOST'),
+  'dbname': os.environ.get('DATABASE')
 }
 
 
@@ -45,7 +48,7 @@ def get_real_time():
     last_call = request.args.get('last', default=None)
 
     vehicles = {'rid': [], 'vid': [], 'lat': [], 'lng': [], 'dir': []}
-    cnx = pg.connect(**config)
+    cnx = pg.connect(**creds)
     cursor = cnx.cursor()
 
     # if last call is none, then return all buses on that route
@@ -197,7 +200,7 @@ def create_graph():
         mapbox_zoom=11.25,
         mapbox_center={"lat": 37.76, "lon": -122.4},
         mapbox={
-            'accesstoken': token},
+            'accesstoken': mapbox_token},
         showlegend=False,
         margin={"r": 0, "t": 0, "l": 0, "b": 0},
         width=800,
@@ -219,7 +222,7 @@ def create_route(coords):
 
     params = {
         'geometries': 'geojson',
-        'access_token': token
+        'access_token': mapbox_token
     }
 
     req = requests.get(url, params=params)
