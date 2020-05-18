@@ -9,7 +9,7 @@ import plotly.utils as pu
 from decouple import config as conf
 from flask_cors import CORS
 from datetime import datetime
-import mysql.connector as sql
+import psycopg2 as pg
 import requests
 
 app = Flask(__name__)
@@ -17,19 +17,19 @@ app = Flask(__name__)
 CORS(app)
 
 token = conf('MAPBOX_TOKEN')
-file = open('sfmta-api/schedule_data.json')
+file = open('schedule_data.json')
 schedule_data = pd.read_json(file, orient='split')
-file = open('sfmta-api/route_data_new.json')
+file = open('route_data_new.json')
 new_route_info = pd.read_json(file, orient='split')
-file = open('sfmta-api/route_paths.json')
+file = open('route_paths.json')
 path_df = pd.read_json(file, orient='split')
 
+# credentials for DB connection
 config = {
   'user': "USER",
   'password': "PASSWORD",
   'host': "HOST",
-  'database': "DATABASE",
-  'raise_on_warnings': True
+  'dbname': "DATABASE",
 }
 
 
@@ -45,7 +45,7 @@ def get_real_time():
     last_call = request.args.get('last', default=None)
 
     vehicles = {'rid': [], 'vid': [], 'lat': [], 'lng': [], 'dir': []}
-    cnx = sql.connect(**config)
+    cnx = pg.connect(**config)
     cursor = cnx.cursor()
 
     # if last call is none, then return all buses on that route
