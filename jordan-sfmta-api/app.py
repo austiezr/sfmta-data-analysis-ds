@@ -9,11 +9,11 @@ import plotly.utils as pu
 from decouple import config as conf
 from flask_cors import CORS
 from datetime import datetime
-# import mysql.connector as sql
 import psycopg2 as pg
 import requests
 
 app = Flask(__name__)
+
 CORS(app)
 
 token = conf('MAPBOX_TOKEN')

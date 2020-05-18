@@ -1,11 +1,12 @@
-# helper class to access the Restbus API
+# helper class to access the RestBus API
 
 import requests
-import json
+# import json
 
-class restbus:
+
+class RestBus:
     def __init__(self):
-        '''The RestBus API setup'''
+        """The RestBus API setup"""
         self.base_url = 'http://restbus.info/api/agencies/sf-muni/'
         self.routes_url = 'routes/'
         self.vehicles_url = 'vehicles/'
@@ -20,7 +21,7 @@ class restbus:
         try:
             status = s.get(url).json()
             s.close()
-        except:
+        except requests.RequestException:
             status = ""
 
         return status
