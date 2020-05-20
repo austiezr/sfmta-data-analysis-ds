@@ -135,7 +135,7 @@ def jsonify_system_real_time():
                            elements=json_elements)
 
 
-@app.route('/daily-general-json', methods=['GET'])
+@app.route('/daily-general-json')
 def get_daily_usage():
     """
      Pulls all data from the specified date as json
