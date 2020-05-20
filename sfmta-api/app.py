@@ -7,7 +7,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.utils as pu
 from flask_cors import CORS
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import psycopg2 as pg
 import requests
 from dotenv import load_dotenv, find_dotenv
@@ -20,11 +20,11 @@ app = Flask(__name__)
 CORS(app)
 
 mapbox_token = os.environ.get('MAPBOX_TOKEN')
-file = open('schedule_data.json')
+file = open('sfmta-api/schedule_data.json')
 schedule_data = pd.read_json(file, orient='split')
-file = open('route_data_new.json')
+file = open('sfmta-api/route_data_new.json')
 new_route_info = pd.read_json(file, orient='split')
-file = open('route_paths.json')
+file = open('sfmta-api/route_paths.json')
 path_df = pd.read_json(file, orient='split')
 
 # credentials for DB connection
@@ -131,7 +131,54 @@ def jsonify_system_real_time():
 
     json_elements = json.dumps(elements, sort_keys=False, default=str)
 
-    return render_template('system_real_time_json.html',
+    return render_template('system-real-time-json.html',
+                           elements=json_elements)
+
+
+@app.route('/daily-general-json', methods=['GET'])
+def get_daily_usage():
+    """
+     Pulls all data from the specified date as json
+     Expects YYYY-MM-DD
+     Defaults to previous day if none given
+    """
+    day = request.args.get('day',
+                           default=(date.today() - timedelta(days=1)))
+    day = f'%{day}%'
+
+    cnx = pg.connect(**creds)
+    cursor = cnx.cursor()
+
+    query = """
+    SELECT
+    timestamp, rid, vid, age, kph, heading, latitude, longitude, direction
+    FROM locations
+    WHERE timestamp::TEXT LIKE %s
+    ORDER BY timestamp;
+    """
+
+    query2 = """
+    SELECT
+    column_name
+    FROM information_schema.columns
+    WHERE table_name = 'locations'
+    """
+
+    cursor.execute(query, (day,))
+    rows = cursor.fetchall()
+
+    cursor.execute(query2)
+    columns = cursor.fetchall()
+
+    elements = []
+
+    for element in rows:
+        elements.append(
+            {columns[x+1][0]: element[x] for x in range(len(element))})
+
+    json_elements = json.dumps(elements, sort_keys=False, default=str)
+
+    return render_template('system-real-time-json.html',
                            elements=json_elements)
 
 
@@ -335,4 +382,4 @@ def create_route(coords):
 if __name__ == "__main__":
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
