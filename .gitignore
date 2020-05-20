@@ -143,5 +143,4 @@ cython_debug/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 .ebextensions/
-sfmta-api/requirements.txt
 sfmta-api/.gitignore
