@@ -131,7 +131,7 @@ def jsonify_system_real_time():
 
     json_elements = json.dumps(elements, sort_keys=False, default=str)
 
-    return render_template('system_real_time.html',
+    return render_template('system_real_time_json.html',
                            elements=json_elements)
 
 
