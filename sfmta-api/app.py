@@ -129,13 +129,10 @@ def jsonify_system_real_time():
         elements.append(
             {columns[x+1][0]: element[x] for x in range(len(element))})
 
-    json_elements = json.dumps(elements, sort_keys=False, default=str)
-
-    return render_template('system-real-time-json.html',
-                           elements=json_elements)
+    return json.dumps(elements, sort_keys=False, default=str)
 
 
-@app.route('/daily-general-json')
+@app.route('/daily-general-json', methods=['GET'])
 def get_daily_usage():
     """
      Pulls all data from the specified date as json
@@ -176,10 +173,7 @@ def get_daily_usage():
         elements.append(
             {columns[x+1][0]: element[x] for x in range(len(element))})
 
-    json_elements = json.dumps(elements, sort_keys=False, default=str)
-
-    return render_template('system-real-time-json.html',
-                           elements=json_elements)
+    return json.dumps(elements, sort_keys=False, default=str)
 
 
 # returns a JSON of raw vehicle location data, given a route id
