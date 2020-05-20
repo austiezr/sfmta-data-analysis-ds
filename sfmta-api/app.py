@@ -20,11 +20,11 @@ app = Flask(__name__)
 CORS(app)
 
 mapbox_token = os.environ.get('MAPBOX_TOKEN')
-file = open('sfmta-api/schedule_data.json')
+file = open('schedule_data.json')
 schedule_data = pd.read_json(file, orient='split')
-file = open('sfmta-api/route_data_new.json')
+file = open('route_data_new.json')
 new_route_info = pd.read_json(file, orient='split')
-file = open('sfmta-api/route_paths.json')
+file = open('route_paths.json')
 path_df = pd.read_json(file, orient='split')
 
 # credentials for DB connection

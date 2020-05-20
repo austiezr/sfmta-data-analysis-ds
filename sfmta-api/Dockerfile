@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-MAINTAINER Your Name "austinziech@gmail.com"
+MAINTAINER Austin Robinson "austinziech@gmail.com"
 
 RUN apt-get update -y && \
     apt-get install -y python3-pip python3-dev
