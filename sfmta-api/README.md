@@ -1,4 +1,4 @@
-# sfmta-data-analysis-ds
+# sfmta-data-analysis-ds/sfmta-api
 
 This folder contains a Flask app that pulls data from the AWS database and serves it to the web front end through API calls.
 Includes basic templates and a couple of baseline endpoints.
