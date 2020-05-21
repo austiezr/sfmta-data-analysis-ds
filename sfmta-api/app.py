@@ -14,13 +14,13 @@ import requests
 from dotenv import load_dotenv, find_dotenv
 import os
 
+# Instantiating app w/ CORS, loading env. variables
 load_dotenv()
-
 app = Flask(__name__)
-
 CORS(app)
 
-mapbox_token = os.environ.get('MAPBOX_TOKEN')
+# Used for currently unimplemented Labs 22 Routes
+# mapbox_token = os.environ.get('MAPBOX_TOKEN')
 # file = open('schedule_data.json')
 # schedule_data = pd.read_json(file, orient='split')
 # file = open('route_data_new.json')
@@ -39,18 +39,25 @@ creds = {
 
 @app.route("/")
 def index():
-    return "Hello"
+    return "Hello there!"
 
 
 @app.route('/test')
 def test():
+    """
+    Temporary route to test DB connection
+    Returns first 10 rows from locations table
+    """
     cnx = pg.connect(**creds)
     cursor = cnx.cursor()
+
     query = """
     SELECT * FROM locations LIMIT 10
     """
+
     cursor.execute(query)
     rows = cursor.fetchall()
+
     return json.dumps(rows, sort_keys=False, default=str)
 
 
