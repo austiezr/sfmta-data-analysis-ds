@@ -13,7 +13,7 @@ An instance of this API is currently (as of 5/21 and for the foreseeable future)
 deployed and functioning via a docker container on Elastic Beanstalk [here][live-api].
 
 You should receive credentials to manage it from your TL;\
-If not, reach out to me through slack or email (austin-robinson@lambdastudents.com)\
+If not, reach out to me through email (austin-robinson@lambdastudents.com)\
 and I may be able to help.
 
 It is very finicky and easily upset. You must be gentle and kind or it will punish you.
@@ -98,7 +98,7 @@ Follow the process and be patient and eventually things will generally stabilize
 If you initiate a process (deployment, config change, etc.) never abort it.\
 This will almost always break the environment and generally requires a full rebuild/redeploy as outlined above.
 
-[live-api]: sfmta-test.eba-5ve9ec22.us-east-1.elasticbeanstalk.com
+[live-api]: http://sfmta-test.eba-5ve9ec22.us-east-1.elasticbeanstalk.com/
 [install]: https://github.com/aws/aws-elastic-beanstalk-cli-setup
 [use]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html
 [EC2 auto-scaling]: https://console.aws.amazon.com/ec2/autoscaling/home?region=us-east-1#AutoScalingGroups:id=awseb-e-46ix3awcsk-stack-AWSEBAutoScalingGroup-241DU78KAD94;view=details
