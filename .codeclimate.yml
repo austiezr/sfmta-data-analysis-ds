@@ -1,0 +1,5 @@
+# excludes files/directories from being analyzed by codeclimate
+# currently excluding all deprecated code
+
+exclude_patterns:
+- "deprecated_assets/"
