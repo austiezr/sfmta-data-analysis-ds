@@ -35,9 +35,12 @@ def get_active_routes():
     # return the list
     return route_list
 
-def collect_schedules(verbose=True):
+def collect_schedules(event, context, verbose=True):
     """
     main handler function, called by AWS Lambda
+
+    params event and context:
+        automatically passed by AWS Lambda, not used here
 
     param verbose: 
         enables print statements that go to the AWS logs
