@@ -3,6 +3,8 @@
 
 import pandas as pd
 import psycopg2 as pg
+import numpy as np
+from scipy import stats
 from dotenv import load_dotenv
 import os
 
@@ -30,7 +32,11 @@ class Schedule:
 
         # process data into a table
         self.inbound_table, self.outbound_table = extract_schedule_tables(self.route_data)
-    
+
+        # calculate the common interval values
+        self.mean_interval, self.common_interval = get_common_intervals(
+                                    [self.inbound_table, self.outbound_table])
+
 def extract_schedule_tables(route_data):
     """
     converts raw schedule data to two pandas dataframes
@@ -61,7 +67,7 @@ def extract_schedule_tables(route_data):
                 inbound_df.at[i, stop['tag']] = stop['content']
         # increment for the next row
         i += 1
-    
+
     # flip between 0 and 1
     outbound = int(not inbound)
 
@@ -82,7 +88,7 @@ def extract_schedule_tables(route_data):
 def load_schedule(route, date):
     """ 
     loads schedule data from the database and returns it
-    
+
     Parameters:
 
         route (str)
@@ -139,3 +145,55 @@ def load_schedule(route, date):
 
     # return each entry in the data list with the correct serviceClass
     return [sched for sched in data if (sched['serviceClass'] == serviceClass)]
+
+def get_common_intervals(df_list):
+    """
+    takes route schedule tables and returns both the average interval (mean)
+    and the most common interval (mode), measured in number of minutes
+
+    takes a list of dataframes and combines them before calculating statistics
+
+    intended to combine inbound and outbound schedules for a single route
+    """
+
+    # ensure we have at least one dataframe
+    if len(df_list) == 0:
+        raise ValueError("Function requires at least one dataframe")
+
+    # append all dataframes in the array together
+    df = df_list[0].copy()
+    for i in range(1, len(df_list)):
+        df.append(df_list[i].copy())
+
+    # convert all values to datetime so we can get an interval easily
+    for col in df.columns:
+        df[col] = pd.to_datetime(df[col])
+
+    # initialize a table to hold each individual interval
+    intervals = pd.DataFrame(columns = df.columns)
+    intervals['temp'] = range(len(df))
+
+    # take each column and find the intervals in it
+    for col in df.columns:
+        prev_time = np.nan
+        for i in range(len(df)):
+            # find the first non-null value and save it to prev_time
+            if pd.isnull(prev_time):
+                prev_time = df.at[i, col]
+            # if the current time is not null, save the interval
+            elif ~pd.isnull(df.at[i, col]):
+                intervals.at[i, col] = (df.at[i, col] - prev_time).seconds / 60
+                prev_time = df.at[i, col]
+
+    # this runs without adding a temp column, but the above loop runs 3x as
+    # fast if the rows already exist
+    intervals = intervals.drop('temp', axis=1)
+
+    # calculate the mean of the entire table
+    mean = intervals.mean().mean()
+
+    # calculate the mode of the entire table, the [0][0] at the end is
+    # because scipy.stats returns an entire ModeResult class
+    mode = stats.mode(intervals.values.flatten())[0][0]
+
+    return mean, mode
