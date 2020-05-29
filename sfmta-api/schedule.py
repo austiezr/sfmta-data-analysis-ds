@@ -16,10 +16,10 @@ class Schedule:
 
         Parameters:
 
-        route_id (str)
+        route_id (str or int)
             - The route id to load
         
-        date (str or pd.Timestamp)
+        date (str or pandas.Timestamp)
             - Which date to load  
             - Converted with pandas.to_datetime so many formats are acceptable
         """
@@ -36,6 +36,83 @@ class Schedule:
         # calculate the common interval values
         self.mean_interval, self.common_interval = get_common_intervals(
                                     [self.inbound_table, self.outbound_table])
+        
+    def list_stops(self):
+        """
+        returns the list of all stops used by this schedule
+        """
+
+        # get stops for both inbound and outbound routes
+        inbound = list(self.inbound_table.columns)
+        outbound = list(self.outbound_table.columns)
+
+        # convert to set to ensure no duplicates, 
+        # then back to list for the correct output type
+        return list(set(inbound + outbound))
+
+    
+    def get_specific_interval(self, stop, time, inbound=True):
+        """
+        Returns the expected interval, in minutes, for a given stop and 
+        time of day.
+
+        Parameters:
+
+        stop (str or int)
+            - the stop tag/id of the bus stop to check
+        
+        time (str or pandas.Timestamp)
+            - the time of day to check, uses pandas.to_datetime to convert
+            - examples that work: "6:00", "3:30pm", "15:30"
+        
+        inbound (bool, optional)
+            - whether to check the inbound or outbound schedule
+            - ignored unless the given stop is in both inbound and outbound
+        """
+
+        # ensure correct parameter types
+        stop = str(stop)
+        time = pd.to_datetime(time)
+
+        # check which route to use, and extract the column for the given stop
+        if (stop in self.inbound_table.columns and 
+            stop in self.outbound_table.columns):
+            # stop exists in both, use inbound parameter to decide
+            if inbound:
+                sched = self.inbound_table[stop]
+            else:
+                sched = self.outbound_table[stop]
+        elif (stop in self.inbound_table.columns):
+            # stop is in the inbound schedule, use that
+            sched = self.inbound_table[stop]
+        elif (stop in self.outbound_table.columns):
+            # stop is in the outbound schedule, use that
+            sched = self.outbound_table[stop]
+        else:
+            # stop doesn't exist in either, throw an error
+            raise ValueError(f"Stop id '{stop}' doesn't exist in either inbound or outbound schedules")
+        
+        # 1: convert schedule to datetime for comparison statements
+        # 2: drop any NaN values
+        # 3: convert to list since pd.Series threw errors on i indexing
+        sched = list(pd.to_datetime(sched).dropna())
+
+        # reset the date portion of the time parameter to
+        # ensure we are checking the schedule correctly
+        time = time.replace(year=self.date.year, month=self.date.month, 
+                            day=self.date.day)
+
+        # iterate through that list to find where the time parameter fits
+        for i in range(1, len(sched)):
+            # start at 1 and move forward,
+            # is the time parameter before this schedule entry?
+            if(time < sched[i]):
+                # return the difference between this entry and the previous one
+                return (sched[i] - sched[i-1]).seconds / 60
+        
+        # can only reach this point if the time parameter is after all entries
+        # in the schedule, return the last available interval
+        return (sched[len(sched)-1] - sched[len(sched)-2]).seconds / 60
 
 def extract_schedule_tables(route_data):
     """
