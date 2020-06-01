@@ -8,6 +8,7 @@ from scipy import stats
 from dotenv import load_dotenv
 import os
 
+
 class Schedule:
     def __init__(self, route_id, date):
         """
@@ -18,9 +19,9 @@ class Schedule:
 
         route_id (str or int)
             - The route id to load
-        
+
         date (str or pandas.Timestamp)
-            - Which date to load  
+            - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
         """
 
@@ -36,7 +37,7 @@ class Schedule:
         # calculate the common interval values
         self.mean_interval, self.common_interval = get_common_intervals(
                                     [self.inbound_table, self.outbound_table])
-        
+
     def list_stops(self):
         """
         returns the list of all stops used by this schedule
@@ -46,25 +47,24 @@ class Schedule:
         inbound = list(self.inbound_table.columns)
         outbound = list(self.outbound_table.columns)
 
-        # convert to set to ensure no duplicates, 
+        # convert to set to ensure no duplicates,
         # then back to list for the correct output type
         return list(set(inbound + outbound))
 
-    
     def get_specific_interval(self, stop, time, inbound=True):
         """
-        Returns the expected interval, in minutes, for a given stop and 
+        Returns the expected interval, in minutes, for a given stop and
         time of day.
 
         Parameters:
 
         stop (str or int)
             - the stop tag/id of the bus stop to check
-        
+
         time (str or pandas.Timestamp)
             - the time of day to check, uses pandas.to_datetime to convert
             - examples that work: "6:00", "3:30pm", "15:30"
-        
+
         inbound (bool, optional)
             - whether to check the inbound or outbound schedule
             - ignored unless the given stop is in both inbound and outbound
@@ -75,8 +75,8 @@ class Schedule:
         time = pd.to_datetime(time)
 
         # check which route to use, and extract the column for the given stop
-        if (stop in self.inbound_table.columns and 
-            stop in self.outbound_table.columns):
+        if (stop in self.inbound_table.columns and
+        stop in self.outbound_table.columns):
             # stop exists in both, use inbound parameter to decide
             if inbound:
                 sched = self.inbound_table[stop]
@@ -91,7 +91,7 @@ class Schedule:
         else:
             # stop doesn't exist in either, throw an error
             raise ValueError(f"Stop id '{stop}' doesn't exist in either inbound or outbound schedules")
-        
+
         # 1: convert schedule to datetime for comparison statements
         # 2: drop any NaN values
         # 3: convert to list since pd.Series threw errors on i indexing
@@ -99,7 +99,7 @@ class Schedule:
 
         # reset the date portion of the time parameter to
         # ensure we are checking the schedule correctly
-        time = time.replace(year=self.date.year, month=self.date.month, 
+        time = time.replace(year=self.date.year, month=self.date.month,
                             day=self.date.day)
 
         # iterate through that list to find where the time parameter fits
@@ -109,10 +109,11 @@ class Schedule:
             if(time < sched[i]):
                 # return the difference between this entry and the previous one
                 return (sched[i] - sched[i-1]).seconds / 60
-        
+
         # can only reach this point if the time parameter is after all entries
         # in the schedule, return the last available interval
         return (sched[len(sched)-1] - sched[len(sched)-2]).seconds / 60
+
 
 def extract_schedule_tables(route_data):
     """
@@ -132,7 +133,7 @@ def extract_schedule_tables(route_data):
     # extract a list of stops to act as columns
     inbound_stops = [s['tag'] for s in route_data[inbound]['header']['stop']]
 
-    #initialize dataframe
+    # initialize dataframe
     inbound_df = pd.DataFrame(columns=inbound_stops)
 
     # extract each row from the data
@@ -147,7 +148,7 @@ def extract_schedule_tables(route_data):
             # increment for the next row
             i += 1
     else:
-        # if there is only 1 trip in a day, the object is a dict and 
+        # if there is only 1 trip in a day, the object is a dict and
         # must be handled slightly differently
         for stop in route_data[inbound]['tr']['stop']:
             if stop['content'] != '--':
@@ -171,21 +172,22 @@ def extract_schedule_tables(route_data):
         for stop in route_data[outbound]['tr']['stop']:
             if stop['content'] != '--':
                     outbound_df.at[0, stop['tag']] = stop['content']
-    
+
     # return both dataframes
     return inbound_df, outbound_df
 
+
 def load_schedule(route, date):
-    """ 
+    """
     loads schedule data from the database and returns it
 
     Parameters:
 
         route (str)
             - The route id to load
-        
+
         date (str or pd.Timestamp)
-            - Which date to load  
+            - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
     """
 
@@ -230,11 +232,12 @@ def load_schedule(route, date):
     else:
         serviceClass = 'sun'
 
-    # the schedule format has two entries for each serviceClass, 
+    # the schedule format has two entries for each serviceClass,
     # one each for inbound and outbound.
 
     # return each entry in the data list with the correct serviceClass
     return [sched for sched in data if (sched['serviceClass'] == serviceClass)]
+
 
 def get_common_intervals(df_list):
     """
@@ -260,7 +263,7 @@ def get_common_intervals(df_list):
         df[col] = pd.to_datetime(df[col])
 
     # initialize a table to hold each individual interval
-    intervals = pd.DataFrame(columns = df.columns)
+    intervals = pd.DataFrame(columns=df.columns)
     intervals['temp'] = range(len(df))
 
     # take each column and find the intervals in it
