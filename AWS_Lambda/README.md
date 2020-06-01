@@ -2,7 +2,7 @@
 
 This folder contains the files running on AWS Lambda.  In order to deploy there, we have to package all needed dependencies into a zip file with the script we are running then upload it to AWS.  Changes to the files in this repository will not affect the live code unless you re-deploy.
 
-The zip file in this directory is a copy of the currently deployed one.
+The zip files in this directory are copies of the currently deployed ones.
 
 ## Adding dependencies
 
