@@ -136,14 +136,22 @@ def extract_schedule_tables(route_data):
     inbound_df = pd.DataFrame(columns=inbound_stops)
 
     # extract each row from the data
-    i = 0
-    for trip in route_data[inbound]['tr']:
-        for stop in trip['stop']:
-            # '--' indicates the bus is not going to that stop on this trip
+    if type(route_data[inbound]['tr']) == list:
+        # if there are multiple trips in a day, structure will be a list
+        i = 0
+        for trip in route_data[inbound]['tr']:
+            for stop in trip['stop']:
+                # '--' indicates the bus is not going to that stop on this trip
+                if stop['content'] != '--':
+                    inbound_df.at[i, stop['tag']] = stop['content']
+            # increment for the next row
+            i += 1
+    else:
+        # if there is only 1 trip in a day, the object is a dict and 
+        # must be handled slightly differently
+        for stop in route_data[inbound]['tr']['stop']:
             if stop['content'] != '--':
-                inbound_df.at[i, stop['tag']] = stop['content']
-        # increment for the next row
-        i += 1
+                    inbound_df.at[0, stop['tag']] = stop['content']
 
     # flip between 0 and 1
     outbound = int(not inbound)
@@ -152,12 +160,17 @@ def extract_schedule_tables(route_data):
     outbound_stops = [s['tag'] for s in route_data[outbound]['header']['stop']]
     outbound_df = pd.DataFrame(columns=outbound_stops)
 
-    i = 0
-    for trip in route_data[outbound]['tr']:
-        for stop in trip['stop']:
+    if type(route_data[outbound]['tr']) == list:
+        i = 0
+        for trip in route_data[outbound]['tr']:
+            for stop in trip['stop']:
+                if stop['content'] != '--':
+                    outbound_df.at[i, stop['tag']] = stop['content']
+            i += 1
+    else:
+        for stop in route_data[outbound]['tr']['stop']:
             if stop['content'] != '--':
-                outbound_df.at[i, stop['tag']] = stop['content']
-        i += 1
+                    outbound_df.at[0, stop['tag']] = stop['content']
     
     # return both dataframes
     return inbound_df, outbound_df
