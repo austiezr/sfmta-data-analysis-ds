@@ -7,6 +7,7 @@ from datetime import date, timedelta
 import psycopg2 as pg
 from dotenv import load_dotenv
 import os
+from .schedule import Schedule
 
 # Instantiating app w/ CORS, loading env. variables
 load_dotenv()
@@ -168,6 +169,37 @@ def get_daily_usage():
             {columns[x+1][0]: element[x] for x in range(len(element))})
 
     return json.dumps(elements, sort_keys=False, default=str)
+
+
+@app.route('/get-route-info', methods=['GET'])
+def get_route_schedule():
+    """
+    Pulls general schedule info for a specified route and date
+    Returns:
+        date specified
+        route specified
+        inbound, outbound dataframes as json
+        list of stops
+        mean, mode intervals between stops fou route
+    Expects date as string: YYYY-MM-DD
+    Expects route as string
+    """
+    route_id = request.args.get('route_id',
+                                default='1')
+    day = request.args.get('day',
+                           default=(date.today() - timedelta(days=1)))
+
+    sched = Schedule(route_id, day, creds)
+
+    tables = {'date': day,
+              'route': sched.route_id,
+              'inbound': sched.inbound_table.to_json(),
+              'outbound': sched.outbound_table.to_json(),
+              'stops': sched.list_stops(),
+              'intervals': {'mean': sched.mean_interval,
+                            'mode': sched.common_interval}}
+
+    return json.dumps(tables, sort_keys=False, default=str)
 
 
 if __name__ == "__main__":
