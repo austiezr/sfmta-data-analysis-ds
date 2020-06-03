@@ -144,5 +144,6 @@ cython_debug/
 !.elasticbeanstalk/*.global.yml
 .ebextensions/
 sfmta-api/.gitignore
+sfmta-api/.env
 .ipynb_checkpoints/
 /Flask_and_DB/collect/__pycache__/
