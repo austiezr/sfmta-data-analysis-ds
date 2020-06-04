@@ -7,14 +7,20 @@ RUN apt-get update -y && \
 
 COPY ./requirements.txt /app/requirements.txt
 
+COPY __init__.py /app/__init__.py
+
+COPY application/schedule /app/schedule
+
+COPY ./templates /app/templates
+
+COPY application/app.py /app/app.py
+
 WORKDIR /app
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r ./requirements.txt
 
 COPY . /app
 
 EXPOSE 5000
 
-ENTRYPOINT [ "python3" ]
-
-CMD [ "app.py" ]
+CMD ["python3", "app.py" ]

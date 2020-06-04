@@ -2,12 +2,12 @@
 
 from flask import Flask, request, render_template
 import json
+import os
 from flask_cors import CORS
 from datetime import date, timedelta
 import psycopg2 as pg
 from dotenv import load_dotenv
-import os
-from .schedule import Schedule
+from schedule.schedule import Schedule
 
 # Instantiating app w/ CORS, loading env. variables
 load_dotenv()
