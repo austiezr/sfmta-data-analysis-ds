@@ -25,8 +25,14 @@ You will need to set up your directory for this api to track to the correct envi
 or create a new environment via eb init, eb create, etc.
 
 In order to deploy changes to it, you will first need to git pull from master,\
-and ensure you've committed or stashed any local changes. Then, eb deploy SHOULD push a\
-and deploy your new build to the live instance.
+and ensure you've committed or stashed any local changes.
+
+I'll say it again.
+
+COMMIT BEFORE YOU DEPLOY.\
+COMMIT. BEFORE. YOU. DEPLOY.
+
+Then, eb deploy SHOULD push and deploy your new build to the live instance.
 
 If everything is working correctly, you should be able to consistently eb deploy changes\
 even if eb is telling you the deploys are failing; if the deploy "fails" but actually does\
