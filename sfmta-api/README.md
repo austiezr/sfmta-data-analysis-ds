@@ -62,7 +62,7 @@ Then from your command line, within the right directory, using the EB CLI:\
 Then back at [this link][EC2 auto-scaling]:
 1) select the appropriate auto-scaling group; should be the only ASG with no instances
 2) Edit
-3) set Desired Capacity, Min, and Max to 1
+3) set Desired Capacity, Min, and Max to 1 (or from the command line: eb scale 1)
 4) Save
 5) wait until your number of instances changes from 0 to 1
 
