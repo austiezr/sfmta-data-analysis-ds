@@ -7,8 +7,6 @@ RUN apt-get update -y && \
 
 COPY ./requirements.txt /app/requirements.txt
 
-COPY __init__.py /app/__init__.py
-
 COPY application/schedule /app/schedule
 
 COPY ./templates /app/templates
