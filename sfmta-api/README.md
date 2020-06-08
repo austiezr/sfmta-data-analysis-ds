@@ -25,8 +25,14 @@ You will need to set up your directory for this api to track to the correct envi
 or create a new environment via eb init, eb create, etc.
 
 In order to deploy changes to it, you will first need to git pull from master,\
-and ensure you've committed or stashed any local changes. Then, eb deploy SHOULD push a\
-and deploy your new build to the live instance.
+and ensure you've committed or stashed any local changes.
+
+I'll say it again.
+
+COMMIT BEFORE YOU DEPLOY.\
+COMMIT. BEFORE. YOU. DEPLOY.
+
+Then, eb deploy SHOULD push and deploy your new build to the live instance.
 
 If everything is working correctly, you should be able to consistently eb deploy changes\
 even if eb is telling you the deploys are failing; if the deploy "fails" but actually does\
@@ -41,11 +47,17 @@ If and when it inevitably breaks for absolutely no reason,\
 and your dashboard is covered with upsetting words like WARNING, DEGRADED, SEVERE,\
 the following process has proven to be the only way to (almost) reliably fix it.
 
+From [this link][EC2 instances]:
+1) find the appropriate instance id for sfmta-test
+
 From [this link][EC2 auto-scaling]:
-1) Edit
-2) set Desired Capacity, Min, and Max to 0
-3) Save
-4) wait until your number of instances changes from 1 to 0
+1) select the appropriate auto-scaling group; you can check by selecting one,\
+ hitting the instances tab at the bottom,\
+and comparing to the instance id from above
+2) Edit
+3) set Desired Capacity, Min, and Max to 0
+4) Save
+5) wait until your number of instances changes from 1 to 0
 
 Then from your command line, within the right directory, using the EB CLI:\
 1) eb deploy
@@ -54,10 +66,11 @@ Then from your command line, within the right directory, using the EB CLI:\
 4) wait in panicked silence until the configuration completes
 
 Then back at [this link][EC2 auto-scaling]:
-1) Edit
-2) set Desired Capacity, Min, and Max to 1
-3) Save
-4) wait until your number of instances changes from 0 to 1
+1) select the appropriate auto-scaling group; should be the only ASG with no instances
+2) Edit
+3) set Desired Capacity, Min, and Max to 1 (or from the command line: eb scale 1)
+4) Save
+5) wait until your number of instances changes from 0 to 1
 
 There is a 90% chance your dashboard will still be horrifying,\
 but the application should now function as expected regardless.\
