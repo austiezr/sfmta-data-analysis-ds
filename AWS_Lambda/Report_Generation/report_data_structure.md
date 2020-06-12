@@ -1,6 +1,6 @@
 ﻿# SFMTA Daily Report Documentation
 
-This document describes the data structure of the daily reports. Below is an example report. Each individual report (all routes, all of one type, or individual routes) is stored in a separate row in the database, identifiable by date and route id columns.
+This document describes the data structure of the daily reports. Below is an example report. Each day’s report is stored in a single row in the database, as a list of these objects.  Each item in the list is the report for that route or group of routes.
 
     {
 	    "route_id": "All",
