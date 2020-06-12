@@ -2,7 +2,7 @@
 # and saves them to the database
 
 # Import code from the other files in this folder
-import report_functions
+import report_functions as func
 
 # Library imports
 import pandas as pd
@@ -12,12 +12,13 @@ import json
 from dotenv import load_dotenv
 import os
 
+
 def generate_report(date):
     """
     Generates the daily report for the given date
 
-    (Before deployment to AWS Lambda, remove date parameter and set it's 
-    value automatically.  Easier to test this way)
+    (Before deployment to AWS Lambda, remove date parameter and set it's
+    value automatically to yesterday.  Easier to test this way)
     """
 
     # Load credentials and connect to the database
@@ -31,8 +32,8 @@ def generate_report(date):
     cnx = pg.connect(**creds)
     cursor = cnx.cursor()
 
-    # get all active routes 
-    route_ids = report_functions.get_active_routes(date, cursor)
+    # get all active routes
+    route_ids = func.get_active_routes(date, cursor)
     route_ids.sort()
     print(f"Found {len(route_ids)} active routes")
 
@@ -42,18 +43,17 @@ def generate_report(date):
     for rid in route_ids:
         try:
             print(f"Generating report for route {rid}...")
-            all_reports.append(report_functions.generate_route_report(rid,
-                                                                date, cnx))
+            all_reports.append(func.generate_route_report(rid, date, cnx))
         except KeyboardInterrupt:
             # if a user wants to stop this early
             break
-        except Exception as err: 
+        except Exception as err:
             # if any particular route throws an error
             print(f"Route {rid} failed, error:")
             print(err, '\n')
-    
+
     # Calculate aggregates for "All" and each type of transit
-    all_reports = report_functions.calculate_aggregate_report(all_reports)
+    all_reports = func.calculate_aggregate_report(all_reports)
     print("Done generating report for", date)
 
     # save new report in the database (all one row)
@@ -104,13 +104,13 @@ def generate_report(date):
     # execute_batch(cursor, query, iter_reports)
     # cnx.commit()
 
+# Used for local testing, will not be needed for deployment
 import time
 if __name__ == "__main__":
-    # Used for local testing, generate a report and save it
     before = time.time()
 
     generate_report('2020-5-26')
-    
+
     elapsed = time.time() - before
     minutes = int(elapsed / 60)
     seconds = round(elapsed % 60, 2)

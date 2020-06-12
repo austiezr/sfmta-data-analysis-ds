@@ -9,6 +9,7 @@ from scipy import stats
 # Schedule class definition
 # (has some extra methods that are not all used in this notebook)
 
+
 class Schedule:
     """
     The Schedule class loads schedule data for a given route and date
@@ -19,9 +20,9 @@ class Schedule:
         route_data (dict): the raw schedule data
         inbound_table (pd.DataFrame): a dataframe of the inbound schedule
         outbound_table (pd.DataFrame): a dataframe of the outbound schedule
-        mean_interval (float): the average time in minutes between each 
+        mean_interval (float): the average time in minutes between each
                                scheduled stop
-        common_interval (float): the most common time (mode) in minutes between 
+        common_interval (float): the most common time (mode) in minutes between
                                  each scheduled stop
     """
 
@@ -38,7 +39,7 @@ class Schedule:
         date (str or pandas.Timestamp)
             - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
-        
+
         connection (psycopg2 connection object)
             - The connection object to connect to the database with
         """
@@ -50,7 +51,8 @@ class Schedule:
         self.route_data = load_schedule(self.route_id, self.date, connection)
 
         # process data into a table
-        self.inbound_table, self.outbound_table = extract_schedule_tables(self.route_data)
+        self.inbound_table, self.outbound_table = \
+            extract_schedule_tables(self.route_data)
 
         # calculate the common interval values
         self.mean_interval, self.common_interval = get_common_intervals(
@@ -94,7 +96,7 @@ class Schedule:
 
         # check which route to use, and extract the column for the given stop
         if (stop in self.inbound_table.columns and
-        stop in self.outbound_table.columns):
+                stop in self.outbound_table.columns):
             # stop exists in both, use inbound parameter to decide
             if inbound:
                 sched = self.inbound_table[stop]
@@ -108,7 +110,8 @@ class Schedule:
             sched = self.outbound_table[stop]
         else:
             # stop doesn't exist in either, throw an error
-            raise ValueError(f"Stop id '{stop}' doesn't exist in either inbound or outbound schedules")
+            raise ValueError(f"Stop id '{stop}' doesn't exist in either",
+                             "inbound or outbound schedules")
 
         # 1: convert schedule to datetime for comparison statements
         # 2: drop any NaN values
@@ -166,8 +169,9 @@ def load_schedule(route, date, connection):
     # execute query and save the route data to a local variable
     cursor.execute(query, (route, str(date), str(date)))
     if cursor.rowcount == 0:
-      raise Exception(f"No schedule data found for route {route} on {date.date()}")
-    
+        raise Exception(f"No schedule data found for route {route}",
+                        f"on {date.date()}")
+
     data = cursor.fetchone()[0]['route']
 
     # pd.Timestamp.dayofweek returns 0 for monday and 6 for Sunday
@@ -185,12 +189,13 @@ def load_schedule(route, date, connection):
     # one each for inbound and outbound.
 
     # get each entry in the data list with the correct serviceClass
-    result = [sched for sched in data if (sched['serviceClass'] == serviceClass)]
+    result = [sched for sched in data if
+              (sched['serviceClass'] == serviceClass)]
 
-    # make sure there's data 
+    # make sure there's data
     # (most commonly reason to be here: some routes don't run on weekends)
     if len(result) == 0:
-      print(f"No schedule data found for route {route} on {date.date()}")
+        print(f"No schedule data found for route {route} on {date.date()}")
 
     return result
 
@@ -203,7 +208,7 @@ def extract_schedule_tables(route_data):
 
     returns inbound_df, outbound_df
     """
-    
+
     # assuming 2 entries, but not assuming order
     if(route_data[0]['direction'] == 'Inbound'):
         inbound = 0
@@ -315,7 +320,7 @@ def get_common_intervals(df_list):
 
 class Route:
     """
-    The Route class loads route definition data for a given route and date, 
+    The Route class loads route definition data for a given route and date,
     such as stop location and path coordinates
 
     Attributes:
@@ -325,13 +330,13 @@ class Route:
         route_type (str): the type of route loaded
         route_name (str): the name of the route loaded
         stops_table (pd.DataFrame): a table of all stops on this route
-        inbound (list): a list of stop tags in the order they appear on the 
+        inbound (list): a list of stop tags in the order they appear on the
                         inbound route
-        outbound (list): a list of stop tags in the order they appear on the 
+        outbound (list): a list of stop tags in the order they appear on the
                          outbound route
 
         Not fully implemented:
-        path_coords (list): a list of (lat,lon) tuples describing the route 
+        path_coords (list): a list of (lat,lon) tuples describing the route
                             path.  These are stored as an unordered collection
                             of sub-paths in the raw data.
     """
@@ -349,7 +354,7 @@ class Route:
         date (str or pandas.Timestamp)
             - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
-        
+
         connection (psycopg2 connection object)
             - The connection object to connect to the database with
         """
@@ -358,10 +363,12 @@ class Route:
         self.date = pd.to_datetime(date)
 
         # load the route data
-        self.route_data, self.route_type, self.route_name = load_route(self.route_id, self.date, connection)
+        self.route_data, self.route_type, self.route_name = \
+            load_route(self.route_id, self.date, connection)
 
         # extract stops table
-        self.stops_table, self.inbound, self.outbound = extract_stops(self.route_data)
+        self.stops_table, self.inbound, self.outbound = \
+            extract_stops(self.route_data)
 
         # The extract_path method is not complete
 
@@ -381,7 +388,7 @@ def load_route(route, date, connection):
         date (str or pd.Timestamp)
             - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
-    
+
     Returns route_data (dict), route_type (str), route_name (str)
     """
 
@@ -404,7 +411,8 @@ def load_route(route, date, connection):
     # execute query and return the route data
     cursor.execute(query, (route, str(date), str(date)))
     if cursor.rowcount == 0:
-      raise Exception(f"No route data found for route {route} on {date.date()}")
+        raise Exception(f"No route data found for route {route}",
+                        f"on {date.date()}")
 
     result = cursor.fetchone()
     return result[2]['route'], result[1], result[0]
@@ -423,14 +431,14 @@ def extract_path(route_data):
     # routes that have multiple sub-paths meeting at a point break this,
     # route 24 is a current example.
     # I'm committing this now to get the rest of the code out there
-    
+
     # this part is also not currently used in the daily report generation
 
     # extract the list of subpaths as just (lat,lon) coordinates
     # also converts from string to float (raw data has strings)
     path = []
     for sub_path in route_data['path']:
-        path.append([(float(p['lat']), float(p['lon'])) 
+        path.append([(float(p['lat']), float(p['lon']))
                      for p in sub_path['point']])
 
     # start with the first element, remove it from path
@@ -443,7 +451,7 @@ def extract_path(route_data):
     while final[0] != final[-1]:
         # loop through the sub-paths that we haven't yet moved to final
         for i in range(len(path)):
-            # check if the last coordinate in final matches the first 
+            # check if the last coordinate in final matches the first
             # coordinate of another sub-path
             if final[-1] == path[i][0]:
                 # match found, move it to final
@@ -451,7 +459,7 @@ def extract_path(route_data):
                 final = final + path[i][1:]
                 path.pop(i)
                 break  # break the for loop
-                
+
         # protection against infinite loops, if the path never closes
         counter -= 1
         if counter < 0:
@@ -459,12 +467,12 @@ def extract_path(route_data):
             break
 
     if not done:
-        # route did not connect in a loop, perform same steps backwards 
+        # route did not connect in a loop, perform same steps backwards
         # to get the rest of the line
         for _ in range(len(path)):
             # loop through the sub-paths that we haven't yet moved to final
             for i in range(len(path)):
-                # check if the first coordinate in final matches the last 
+                # check if the first coordinate in final matches the last
                 # coordinate of another sub-path
                 if final[0] == path[i][-1]:
                     # match found, move it to final
@@ -474,7 +482,7 @@ def extract_path(route_data):
                     break  # break the for loop
 
     # some routes may have un-used sub-paths
-    # Route 1 for example has two sub-paths that are almost identical, with the 
+    # Route 1 for example has two sub-paths that are almost identical, with the
     # same start and end points
     # if len(path) > 0:
     #     print(f"WARNING: {len(path)} unused sub-paths")
@@ -487,7 +495,7 @@ def extract_stops(route_data):
     """
     Extracts a dataframe of stops info
 
-    Returns the main stops dataframe, and a list of inbound and outbound stops 
+    Returns the main stops dataframe, and a list of inbound and outbound stops
     in the order they are intended to be on the route
     """
 
