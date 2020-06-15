@@ -8,7 +8,7 @@ from scipy import stats
 
 
 class Schedule:
-    def __init__(self, route_id, date, connection):
+    def __init__(self, route_id, date, creds):
         """
         The Schedule class loads the schedule for a particular route and day,
         and makes several accessor methods available for it.
@@ -21,16 +21,20 @@ class Schedule:
         date (str or pandas.Timestamp)
             - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
-        """
 
+        creds (dict)
+            -  local environment variables for db connection
+        """
+        self.creds = creds
         self.route_id = str(route_id)
         self.date = pd.to_datetime(date)
 
         # load the schedule for that date and route
-        self.route_data = load_schedule(self.route_id, self.date, connection)
+        self.route_data = load_schedule(self.route_id, self.date, self.creds)
 
         # process data into a table
-        self.inbound_table, self.outbound_table = extract_schedule_tables(self.route_data)
+        self.inbound_table, self.outbound_table = \
+            extract_schedule_tables(self.route_data)
 
         # calculate the common interval values
         self.mean_interval, self.common_interval = get_common_intervals(
@@ -74,26 +78,27 @@ class Schedule:
 
         # check which route to use, and extract the column for the given stop
         if (stop in self.inbound_table.columns and
-        stop in self.outbound_table.columns):
+                stop in self.outbound_table.columns):
             # stop exists in both, use inbound parameter to decide
             if inbound:
                 sched = self.inbound_table[stop]
             else:
                 sched = self.outbound_table[stop]
-        elif (stop in self.inbound_table.columns):
+        elif stop in self.inbound_table.columns:
             # stop is in the inbound schedule, use that
             sched = self.inbound_table[stop]
-        elif (stop in self.outbound_table.columns):
+        elif stop in self.outbound_table.columns:
             # stop is in the outbound schedule, use that
             sched = self.outbound_table[stop]
         else:
             # stop doesn't exist in either, throw an error
-            raise ValueError(f"Stop id '{stop}' doesn't exist in either inbound or outbound schedules")
+            raise ValueError(f"Stop id '{stop}' doesn't exist "
+                             f"in either inbound or outbound schedules")
 
         # 1: convert schedule to datetime for comparison statements
         # 2: drop any NaN values
         # 3: convert to list since pd.Series threw errors on i indexing
-        sched = list(pd.to_datetime(sched).dropna())
+        sched = list(pd.to_datetime(sched.dropna()))
 
         # reset the date portion of the time parameter to
         # ensure we are checking the schedule correctly
@@ -104,7 +109,7 @@ class Schedule:
         for i in range(1, len(sched)):
             # start at 1 and move forward,
             # is the time parameter before this schedule entry?
-            if(time < sched[i]):
+            if time < sched[i]:
                 # return the difference between this entry and the previous one
                 return (sched[i] - sched[i-1]).seconds / 60
 
@@ -123,7 +128,7 @@ def extract_schedule_tables(route_data):
     """
 
     # assuming 2 entries, but not assuming order
-    if(route_data[0]['direction'] == 'Inbound'):
+    if route_data[0]['direction'] == 'Inbound':
         inbound = 0
     else:
         inbound = 1
@@ -150,7 +155,7 @@ def extract_schedule_tables(route_data):
         # must be handled slightly differently
         for stop in route_data[inbound]['tr']['stop']:
             if stop['content'] != '--':
-                    inbound_df.at[0, stop['tag']] = stop['content']
+                inbound_df.at[0, stop['tag']] = stop['content']
 
     # flip between 0 and 1
     outbound = int(not inbound)
@@ -169,13 +174,13 @@ def extract_schedule_tables(route_data):
     else:
         for stop in route_data[outbound]['tr']['stop']:
             if stop['content'] != '--':
-                    outbound_df.at[0, stop['tag']] = stop['content']
+                outbound_df.at[0, stop['tag']] = stop['content']
 
     # return both dataframes
     return inbound_df, outbound_df
 
 
-def load_schedule(route, date, connection):
+def load_schedule(route, date, creds):
     """
     loads schedule data from the database and returns it
 
@@ -184,17 +189,21 @@ def load_schedule(route, date, connection):
         route (str)
             - The route id to load
 
-        date (str or pd.Timestamp)
+        date (str or pd.Datetime)
             - Which date to load
             - Converted with pandas.to_datetime so many formats are acceptable
+
+        creds (dict)
+            -  local environment variables for db connection
     """
 
     # ensure correct parameter types
     route = str(route)
     date = pd.to_datetime(date)
 
-    # get DB cursor
-    cursor = connection.cursor()
+    # load environment variables for DB connection
+    cnx = pg.connect(**creds)
+    cursor = cnx.cursor()
 
     # build selection query
     query = """
