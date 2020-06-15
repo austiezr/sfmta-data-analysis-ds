@@ -126,7 +126,7 @@ Follow the process and be patient and eventually things will generally stabilize
 If you initiate a process (deployment, config change, etc.) never abort it.\
 This will almost always break the environment and generally requires a full rebuild/redeploy as outlined above.
 
-[live-api]: http://sfmta-test.eba-5ve9ec22.us-east-1.elasticbeanstalk.com/
+[live-api]: http://ds.datadriventransit.org/
 [install]: https://github.com/aws/aws-elastic-beanstalk-cli-setup
 [use]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html
 [EC2 auto-scaling]: https://console.aws.amazon.com/ec2/autoscaling/home?region=us-east-1#AutoScalingGroups:id=awseb-e-46ix3awcsk-stack-AWSEBAutoScalingGroup-241DU78KAD94;view=details

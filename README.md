@@ -1,12 +1,6 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
+# SFMTA Data Analysis
 
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
-# SF MTA Data Analysis
-
-Take a look at our product here 👉🏼 [🚎](https://master.d3j9ctmbednoov.amplifyapp.com)
+Take a look at our product [here!][live]
 
 ## Contributors
 
@@ -16,97 +10,88 @@ Take a look at our product here 👉🏼 [🚎](https://master.d3j9ctmbednoov.am
 |                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/AVdata/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Jordan-Ireland/)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/skredenmathias/)
 | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/vargasstem/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jordan-b-ireland/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/skredenmathias/) 
 
-
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
-![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](netlify link goes in these parenthesis)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
-🚫 more info on using badges [here](https://github.com/badges/shields)
-
 ## Project Overview
 
-[<img src="https://d2k1ftgv7pobq7.cloudfront.net/meta/u/res/images/brand-assets/Logos/0099ec3754bf473d2bbf317204ab6fea/trello-logo-blue.png" width="65"> Board](https://trello.com/b/0X0QTiP4/labs22-sftma-data-analysis)
-
-[Product Canvas👩‍🎨](https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0)
+[Product Canvas][notion]
 
 ### Project Description:
 
-This project began as a greenfield project proposed by [Jarie Bolander](https://www.linkedin.com/in/jariebolander/) in colaboration with Lambda School Labs students.  The aim was, and continues to be to provide near real time analysis of travel times from major travel corridors. Give citizens, oversight committee members, and SFMTA staff accurate and timely historical data, along with statistics and analysis, to make informed decisions to measure system wide improvements.
+This project began as a greenfield project proposed by [Jarie Bolander][jarie] in collaboration with Lambda School Labs\
+students. The aim of this project is to provide historical analysis of traffic flow within the SFMTA system.\ 
+We hope to give citizens, oversight committee members, and SFMTA staff accurate and timely historical data,\
+along with statistics and analysis, to make informed decisions for system wide improvements.
 
-[The Front End](https://master.d3j9ctmbednoov.amplifyapp.com/)
+We are serving our reports generated from our data and analysis through [datadriventransit.org][live].\
+Our raw data and analysis is available through our API[api];\
+further information on accessing and maintaining the API can be found [here][apireadme].
+
+[The Front End][live]
 
 ### Tech Stack
 
-- [Python](https://www.python.org)
-- [MySQL](https://www.mysql.com)
-- [AWS RDS](https://aws.amazon.com/rds/)
-- [Pandas](https://pandas.pydata.org)
-- [Plotly](https://plotly.com/python/)
-- [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)
-- [Jupyter Lab](https://jupyter.org)
+- [Python][python]
+- [PostgreSQL][postgres]
+- [AWS RDS][rds]
+- [AWS Lambda][lambda]
+- [AWS Elastic Beanstalk][eb]
+- [AWS Amplify][amplify]
+- [Pandas][pandas]
+- [Mapbox][mapbox]
+- [Flask][flask]
+- [Google Colab][colab]
+- [Jupyter Lab][jupyter]
 
 ### Predictions
 
-Considering the complexity, volume, and feature engineering required for this project, a significant amount of time was invested in thinking about potential approaches to the analysis, and to the scaling of newly constructed dataframes; as you navigate through this README file, you'll understand what is meant.  If you take a look at the notebooks under 'Data Sources'  you'll have more calrity in the directions and trajectory of the analysis.  Moving forward, the predictions will come in the form of ETAs, as well as bunching and gapping.  
+Considering the complexity, volume, and feature engineering required for this project, a significant amount of time was\
+invested in thinking about potential approaches to the analysis, pipeline engineering, and data storage.\
+Much of the exploratory and experimental work done by Labs 24 is available [here][labs24];\
+similarly, exploratory work done by Labs 22 is available [here][labs22].
 
-### Explanatory Variables
-
--   [Explanatory Variable 1: Route 1 Analysis]()
--   [Explanatory Variable 2]()
--   [Explanatory Variable 3]()
--   [Explanatory Variable 4]()
--   [Explanatory Variable 5]()
+We are not serving any predictions here, nor was that our goal. However, given the foundation now laid, it may be\
+within grasp of a future cohort to begin actual predictive modeling on this data in the form of predicting ETAs,\
+service disruptions, etc.
 
 ### Data Sources
-🚫  Add to or delete souce links as needed for your project
 
+Our primary source of data is [NextBus][nextbus], via the [RestBus API][restbus]. This data consists of route and\
+schedule data made available by SFMTA, as well as detailed vehicle-level data for every active vehicle in the SFMTA\
+system, every minute. A detailed breakdown of this data is available [here][data].
 
--   [Source 1] (🚫add link to python notebook here)
--   [Source 2] (🚫add link to python notebook here)
--   [Source 3] (🚫add link to python notebook here)
--   [Source 4] (🚫add link to python notebook here)
--   [Source 5] (🚫add link to python notebook here)
+### README TODO:
 
-### Python Notebooks
-
-🚫  Add to or delete python notebook links as needed for your project
-
-[Python Notebook 1](🚫add link to python notebook here)
-
-[Python Notebook 2](🚫add link to python notebook here)
-
-[Python Notebook 3](🚫add link to python notebook here)
-
-### 3️⃣ How to connect to the web API
-
-🚫 List directions on how to connect to the API here
-
-### 3️⃣ How to connect to the data API
-
-🚫 List directions on how to connect to the API here
+- how-to:
+  - connect to the db
+  - onboard to AWS
+- update contributors
 
 ## Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
+Please note we have a [code of conduct][conduct]. 
 
-Please note we have a [code of conduct](./code_of_conduct.md.md). Please follow it in all your interactions with the project.
+Please follow it in all your interactions with the project.
 
 ### Issue/Bug Request
 
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
  - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+ - Check to see if the issue has recently been fixed by attempting to reproduce the issue
+  using the latest master branch in the repository.
  - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+ - Submit a detailed bug report including your environment & browser, 
+ steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, 
+ and any potential solutions you have considered.
 
 ### Feature Requests
 
-We would love to hear from you about new features which would improve this app and further the aims of our project. Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
+We would love to hear from you about new features which would improve this app and further the aims of our project. 
+
+Please provide as much detail and information as possible to show us why you think your new feature should be implemented.
 
 ### Pull Requests
 
-If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request. It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
+If you have developed a patch, bug fix, or new feature that would improve this app, please submit a pull request.\
+It is best to communicate your ideas with the developers first before investing a great deal of time into a pull request to ensure that it will mesh smoothly with the project.
 
 Remember that this project is licensed under the MIT license, and by submitting a pull request, you agree that your work will be, too.
 
@@ -120,11 +105,35 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 ### Attribution
 
-These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
+These contribution guidelines have been adapted from [this template][pr].
 
 ## Documentation
 
-See [Backend Documentation](_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation][be] for details on the backend of our project.
 
-See [Front End Documentation](_link to your front end readme here_) for details on the front end of our project.
+See [Front End Documentation][fe] for details on the front end of our project.
 
+[live]: datadriventransit.org
+[notion]: https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0
+[jarie]: https://www.linkedin.com/in/jariebolander/
+[api]: http://ds.datadriventransit.org/
+[apireadme]: sfmta-data-analysis-ds/sfmta-api/README.md
+[python]: https://www.python.org
+[postgres]: https://www.postgresql.org/
+[rds]: https://aws.amazon.com/rds/
+[lambda]: https://aws.amazon.com/lambda/
+[eb]: https://aws.amazon.com/elasticbeanstalk/
+[pandas]: https://pandas.pydata.org/
+[mapbox]: https://www.mapbox.com/
+[flask]: https://flask.palletsprojects.com/en/1.1.x/
+[colab]: https://colab.research.google.com/notebooks/intro.ipynb#recent=true
+[jupyter]: https://jupyter.org
+[labs24]: sfmta-data-analysis-ds/labs24_notebooks
+[labs22]: sfmta-data-analysis-ds/deprecated_assets/labs22_notebooks
+[nextbus]: www.nextbus.com
+[restbus]: http://restbus.info/
+[data]: sfmta-data-analysis-ds/DATAREADME.md
+[conduct]: sfmta-data-analysis-ds/code_of_conduct.md
+[pr]: https://gist.github.com/PurpleBooth/b24679402957c63ec426
+[be]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-be
+[fe]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-fe
