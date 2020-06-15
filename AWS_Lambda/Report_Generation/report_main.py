@@ -11,15 +11,34 @@ from psycopg2.extras import execute_batch
 import json
 from dotenv import load_dotenv
 import os
+import traceback
 
 
-def generate_report(date):
+def generate_report(event, context, date='yesterday', new_report=True):
     """
     Generates the daily report for the given date
 
     (Before deployment to AWS Lambda, remove date parameter and set it's
     value automatically to yesterday.  Easier to test this way)
+
+    Arguments:
+        event, context: keyword arguments required by AWS Lambda, not used
+
+        date (str): the date of the report to generate (default: 'yesterday')
+
+        new_report (bool): if true, the report is saved to a new row in the
+                           database.  if false, updates the report object on an
+                           existing row with the same date. (default: True)
     """
+
+    if date == 'yesterday':
+        # actually get a timestamp for yesterday
+        date = pd.to_datetime('today') - pd.Timedelta(days=1)
+        date = date.replace(hour=0, minute=0, second=0)
+    else:
+        date = pd.to_datetime(date)
+
+    print('Generating report for', date)
 
     # Load credentials and connect to the database
     load_dotenv()
@@ -46,24 +65,39 @@ def generate_report(date):
             all_reports.append(func.generate_route_report(rid, date, cnx))
         except KeyboardInterrupt:
             # if a user wants to stop this early
-            break
-        except Exception as err:
-            # if any particular route throws an error
-            print(f"Route {rid} failed, error:")
-            print(err, '\n')
+            print("Keyboard interrupt, quitting")
+            quit()
+        except:
+            # if any particular route throws an error, print the traceback 
+            # so we can troubleshoot it
+            print(f"Route {rid} failed, traceback:\n")
+            traceback.print_exc()
+            print()
 
     # Calculate aggregates for "All" and each type of transit
     all_reports = func.calculate_aggregate_report(all_reports)
     print("Done generating report for", date)
 
-    # save new report in the database (all one row)
-    query = """
-        INSERT INTO reports (date, report)
-        VALUES (%s, %s);
-    """
-    cursor.execute(query, (date, json.dumps(all_reports)))
-    cnx.commit()
-    print("Report saved")
+    if new_report:
+        # save new report in the database (all one row)
+        query = """
+            INSERT INTO reports (date, report)
+            VALUES (%s, %s);
+        """
+        cursor.execute(query, (date, json.dumps(all_reports)))
+        cnx.commit()
+        print("Report saved")
+    else:
+        # Update an existing report in the database
+        query = """
+            UPDATE reports
+            SET report = %s
+            WHERE date = %s ::TIMESTAMP;
+        """
+        cursor.execute(query, (json.dumps(all_reports), date))
+        cnx.commit()
+        print("Report updated")
+
 
     # Extra code with more options to save or update reports:
 
@@ -71,19 +105,6 @@ def generate_report(date):
 
     # with open(f'report_{date}.json', 'w') as outfile:
     #     json.dump(all_reports, outfile)
-
-
-    # Update an existing report in the database (if needed)
-
-    # query = """
-    #     UPDATE reports
-    #     SET report = %s
-    #     WHERE date = %s ::TIMESTAMP;
-    # """
-
-    # d = str(pd.to_datetime(date).date())
-    # cursor.execute(query, (json.dumps(all_reports), d))
-    # cnx.commit()
 
 
     # Save new report in the database (separate rows method)
@@ -103,15 +124,3 @@ def generate_report(date):
     # """
     # execute_batch(cursor, query, iter_reports)
     # cnx.commit()
-
-# Used for local testing, will not be needed for deployment
-import time
-if __name__ == "__main__":
-    before = time.time()
-
-    generate_report('2020-5-26')
-
-    elapsed = time.time() - before
-    minutes = int(elapsed / 60)
-    seconds = round(elapsed % 60, 2)
-    print(f"\nFinished in {minutes} minutes and {seconds} seconds")
