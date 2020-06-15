@@ -269,21 +269,21 @@ def get_bunches_gaps(stop_times, schedule,
             # print(f"Stop {stop} had no recorded times")
             continue  # go to next stop in the loop
 
-    # save initial time
-    prev_time = stop_times[stop][0]
+        # save initial time
+        prev_time = stop_times[stop][0]
 
-    # loop through all others, comparing to the previous one
-    for time in stop_times[stop][1:]:
-        diff = (time - prev_time).seconds
-        if diff <= bunch_threshold:
-            # bunch found, save it
-            problems.at[counter] = ['bunch', prev_time, diff, stop]
-            counter += 1
-        elif diff >= gap_threshold:
-            problems.at[counter] = ['gap', prev_time, diff, stop]
-            counter += 1
+        # loop through all others, comparing to the previous one
+        for time in stop_times[stop][1:]:
+            diff = (time - prev_time).seconds
+            if diff <= bunch_threshold:
+                # bunch found, save it
+                problems.at[counter] = ['bunch', prev_time, diff, stop]
+                counter += 1
+            elif diff >= gap_threshold:
+                problems.at[counter] = ['gap', prev_time, diff, stop]
+                counter += 1
 
-        prev_time = time
+            prev_time = time
 
     return problems
 
