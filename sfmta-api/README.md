@@ -4,8 +4,23 @@ This folder contains a Flask app that pulls data from the AWS database,\
 and serves it to the web front end through API calls.\
 Includes basic templates and a couple of baseline endpoints.
 
+Currently this API isn't used in production, but serves as a quick and easy vehicle for exploratory work and testing\
+for the DS team. Eventually API will be used in production app very rarely, to generate custom reports outside of our\
+storage window. See TODO [here][TODO].
 
-05/20 - Folder also contains Dockerfile and requirements.txt for Elastic Beanstalk deployment via docker. 
+05/20 - Folder also contains Dockerfile and requirements.txt for Elastic Beanstalk deployment via docker.
+06/15 - Also includes the schedule package (implemented) and routes package (not implemented) to facilitate handling/
+schedule and route data, as well as a brief TODO.
+
+## Endpoints
+
+- / - returns "Hello there!" - used to test successful deployment
+- /test - returns head of locations table - used to test DB connection
+- /system-real-time - returns 100 most recent entries in locations, human readable - used for testing, no longer needed
+- /system-real-time-json - same as above, machine readable
+- /daily-general-json, method=['GET'] - full data from given date, used by DS team for exploratory work and testing
+- /daily-route-json, method=['GET'] - full data for given date and route, used as above
+- /get-route-info, methods=['GET'] - schedule info for specified route and date, used as above
 
 # For Future Cohorts, With Love From Labs 24:
 
@@ -116,3 +131,4 @@ This will almost always break the environment and generally requires a full rebu
 [use]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html
 [EC2 auto-scaling]: https://console.aws.amazon.com/ec2/autoscaling/home?region=us-east-1#AutoScalingGroups:id=awseb-e-46ix3awcsk-stack-AWSEBAutoScalingGroup-241DU78KAD94;view=details
 [dash]: https://console.aws.amazon.com/elasticbeanstalk/home?region=us-east-1#/environment/dashboard?applicationName=sfmta-test&environmentId=e-46ix3awcsk
+[todo]: sfmta-data-analysis-ds/sfmta-api/TODO.md
