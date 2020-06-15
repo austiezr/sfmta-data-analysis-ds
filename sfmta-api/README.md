@@ -9,7 +9,8 @@ for the DS team. Eventually API will be used in production app very rarely, to g
 storage window. See TODO [here][TODO].
 
 05/20 - Folder also contains Dockerfile and requirements.txt for Elastic Beanstalk deployment via docker.
-06/15 - Also includes the schedule package to facilitate handling schedule data, as well as a brief TODO.
+06/15 - Also includes the schedule package (implemented) and routes package (not implemented) to facilitate handling/
+schedule and route data, as well as a brief TODO.
 
 ## Endpoints
 
