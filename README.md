@@ -22,7 +22,7 @@ We hope to give citizens, oversight committee members, and SFMTA staff accurate 
 along with statistics and analysis, to make informed decisions for system wide improvements.
 
 We are serving our reports generated from our data and analysis through [datadriventransit.org][live].\
-Our raw data and analysis is available through our API[api];\
+Our raw data and analysis is available through our [API][api].\
 further information on accessing and maintaining the API can be found [here][apireadme].
 
 [The Front End][live]
@@ -113,11 +113,11 @@ See [Backend Documentation][be] for details on the backend of our project.
 
 See [Front End Documentation][fe] for details on the front end of our project.
 
-[live]: datadriventransit.org
+[live]: https://www.datadriventransit.org
 [notion]: https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0
 [jarie]: https://www.linkedin.com/in/jariebolander/
 [api]: http://ds.datadriventransit.org/
-[apireadme]: sfmta-data-analysis-ds/sfmta-api/README.md
+[apireadme]: sfmta-api/README.md
 [python]: https://www.python.org
 [postgres]: https://www.postgresql.org/
 [rds]: https://aws.amazon.com/rds/
@@ -128,12 +128,12 @@ See [Front End Documentation][fe] for details on the front end of our project.
 [flask]: https://flask.palletsprojects.com/en/1.1.x/
 [colab]: https://colab.research.google.com/notebooks/intro.ipynb#recent=true
 [jupyter]: https://jupyter.org
-[labs24]: sfmta-data-analysis-ds/labs24_notebooks
-[labs22]: sfmta-data-analysis-ds/deprecated_assets/labs22_notebooks
-[nextbus]: www.nextbus.com
+[labs24]: labs24_notebooks
+[labs22]: deprecated_assets/labs22_notebooks
+[nextbus]: https://www.nextbus.com
 [restbus]: http://restbus.info/
-[data]: sfmta-data-analysis-ds/DATAREADME.md
-[conduct]: sfmta-data-analysis-ds/code_of_conduct.md
+[data]: DATAREADME.md
+[conduct]: code_of_conduct.md
 [pr]: https://gist.github.com/PurpleBooth/b24679402957c63ec426
 [be]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-be
 [fe]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-fe
