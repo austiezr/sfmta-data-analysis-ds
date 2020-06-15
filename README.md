@@ -4,11 +4,21 @@ Take a look at our product [here!][live]
 
 ## Contributors
 
-|                                       [Agustin Cody Vargas](https://github.com/AVData/)                        |                                       [Jordan Ireland](https://github.com/Jordan-Ireland/)                                        |                                       [Mathias Ragnarson Skreden](https://github.com/skredenmathias/)                                        |                                                            
-| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------:  |
-|                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UP8JY0CG6-cd15b5cb2cf1-512" width = "200" />](https://github.com/AVData/)                       |                      [<img src="https://ca.slack-edge.com/T4JUEB3ME-UL5US8MPA-f77dd1589c92-512" width = "200" width = "200" />](https://github.com/Jordan-Ireland/)                       |                      [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/skredenmathias/)                                         
-|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/AVdata/)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Jordan-Ireland/)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/skredenmathias/)
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/vargasstem/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jordan-b-ireland/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/skredenmathias/) 
+### Labs 22
+
+| [Agustin Cody Vargas](https://github.com/AVData/) | [Jordan Ireland](https://github.com/Jordan-Ireland/) | [Mathias Ragnarson Skreden](https://github.com/skredenmathias/) |
+| :---: | :---: | :---: |
+| [<img src="https://ca.slack-edge.com/T4JUEB3ME-UP8JY0CG6-cd15b5cb2cf1-512" width = "200" />](https://github.com/AVData/) | [<img src="https://ca.slack-edge.com/T4JUEB3ME-UL5US8MPA-f77dd1589c92-512" width = "200"/>](https://github.com/Jordan-Ireland/) | [<img src="https://www.dalesjewelers.com/wp-content/uploads/2018/10/placeholder-silhouette-male.png" width = "200" />](https://github.com/skredenmathias/) |
+| [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/AVdata/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Jordan-Ireland/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/skredenmathias/) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/vargasstem/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jordan-b-ireland/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/skredenmathias/)
+
+### Labs 24
+
+| [Austie Robinson](https://github.com/austiezr/) | [Isaac Grove](https://github.com/isaacgrove/) | [Jonathan Duke](https://github.com/jonDuke/) | [Ramses Gasque](https://github.com/cedro-gasque) |
+| :---: | :---: | :---: | :---: |
+| [<img src="https://ca.slack-edge.com/ESZCHB482-W012JQ2V32P-19d3634d13b4-512/" width = "200" />](https://github.com/austiezr/) | [<img src="https://ca.slack-edge.com/ESZCHB482-W0123RQLG9M-cf6cb774b8f9-512/" width = "200"/>](https://github.com/isaacgrove/) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012BRSKSSJ-7c0297765102-512/" width = "200" />](https://github.com/jonDuke/) | [<img src="https://ca.slack-edge.com/ESZCHB482-W012JQ3PX27-0f3550a702ab-512/" width = "200" />](https://github.com/cedro-gasque) |
+| [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/austiezr/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/isaacgrove/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jonDuke/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/cedro-gasque) |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/austin-ziech-robinson/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/isaac-grove-01300b177/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jonduke90/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ]() |
 
 ## Project Overview
 
@@ -22,7 +32,7 @@ We hope to give citizens, oversight committee members, and SFMTA staff accurate 
 along with statistics and analysis, to make informed decisions for system wide improvements.
 
 We are serving our reports generated from our data and analysis through [datadriventransit.org][live].\
-Our raw data and analysis is available through our API[api];\
+Our raw data and analysis is available through our [API][api].\
 further information on accessing and maintaining the API can be found [here][apireadme].
 
 [The Front End][live]
@@ -113,11 +123,11 @@ See [Backend Documentation][be] for details on the backend of our project.
 
 See [Front End Documentation][fe] for details on the front end of our project.
 
-[live]: datadriventransit.org
+[live]: https://www.datadriventransit.org
 [notion]: https://www.notion.so/SFMTA-Data-Analysis-d5d25791fbca4b1bbd0049f95275e5a0
 [jarie]: https://www.linkedin.com/in/jariebolander/
 [api]: http://ds.datadriventransit.org/
-[apireadme]: sfmta-data-analysis-ds/sfmta-api/README.md
+[apireadme]: sfmta-api/README.md
 [python]: https://www.python.org
 [postgres]: https://www.postgresql.org/
 [rds]: https://aws.amazon.com/rds/
@@ -128,12 +138,12 @@ See [Front End Documentation][fe] for details on the front end of our project.
 [flask]: https://flask.palletsprojects.com/en/1.1.x/
 [colab]: https://colab.research.google.com/notebooks/intro.ipynb#recent=true
 [jupyter]: https://jupyter.org
-[labs24]: sfmta-data-analysis-ds/labs24_notebooks
-[labs22]: sfmta-data-analysis-ds/deprecated_assets/labs22_notebooks
-[nextbus]: www.nextbus.com
+[labs24]: labs24_notebooks
+[labs22]: deprecated_assets/labs22_notebooks
+[nextbus]: https://www.nextbus.com
 [restbus]: http://restbus.info/
-[data]: sfmta-data-analysis-ds/DATAREADME.md
-[conduct]: sfmta-data-analysis-ds/code_of_conduct.md
+[data]: DATAREADME.md
+[conduct]: code_of_conduct.md
 [pr]: https://gist.github.com/PurpleBooth/b24679402957c63ec426
 [be]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-be
 [fe]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-fe
