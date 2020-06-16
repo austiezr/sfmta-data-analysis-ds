@@ -5,18 +5,55 @@ from report_main import generate_report
 import pandas as pd
 import time
 
+import psycopg2 as pg
+import json
+from dotenv import load_dotenv
+import os
+
+
+def download_report(date):
+    """
+    Loads a report from the database and saves to a local json file
+
+    date (str): the date to pull
+    """
+
+    # Set up database connection
+    load_dotenv()
+    creds = {
+      'user': os.environ.get('USER'),
+      'password': os.environ.get('PASSWORD'),
+      'host': os.environ.get('HOST'),
+      'dbname': os.environ.get('DATABASE')
+    }
+    cnx = pg.connect(**creds)
+    cursor = cnx.cursor()
+
+    # Fetch report from the database
+    query = """
+        SELECT report
+        FROM reports
+        WHERE date = %s ::TIMESTAMP;
+    """
+    cursor.execute(query, (date,))
+    data = cursor.fetchone()[0]
+
+    # Save to a file
+    with open(f'report_{date}.json', 'w') as outfile:
+         json.dump(data, outfile)
+
 
 if __name__ == "__main__":
     # Used this code to back-fill reports we had not generated yet, ran locally
-    begin = pd.to_datetime('2020-5-28')
-    end = pd.to_datetime('2020-6-12')
+    begin = pd.to_datetime('2020-6-14')
+    end = pd.to_datetime('2020-6-14')
 
     while begin <= end:
         start_time = time.time()
 
         # generate report for this day
         # (change new_report to False to update existing reports instead)
-        generate_report(event='', context='', date=begin, new_report=True)
+        generate_report(event='', context='', date=begin, new_report=False)
 
         # print execution time
         elapsed = time.time() - start_time
