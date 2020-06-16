@@ -27,7 +27,7 @@ Take a look at our product [here!][live]
 ### Project Description:
 
 This project began as a greenfield project proposed by [Jarie Bolander][jarie] in collaboration with Lambda School Labs\
-students. The aim of this project is to provide historical analysis of traffic flow within the SFMTA system.\ 
+students. The aim of this project is to provide historical analysis of traffic flow within the SFMTA system.\
 We hope to give citizens, oversight committee members, and SFMTA staff accurate and timely historical data,\
 along with statistics and analysis, to make informed decisions for system wide improvements.
 
@@ -133,6 +133,7 @@ See [Front End Documentation][fe] for details on the front end of our project.
 [rds]: https://aws.amazon.com/rds/
 [lambda]: https://aws.amazon.com/lambda/
 [eb]: https://aws.amazon.com/elasticbeanstalk/
+[amplify]: https://aws.amazon.com/amplify/
 [pandas]: https://pandas.pydata.org/
 [mapbox]: https://www.mapbox.com/
 [flask]: https://flask.palletsprojects.com/en/1.1.x/
