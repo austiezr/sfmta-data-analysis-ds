@@ -24,12 +24,22 @@ def lambda_handler(event, context):
     cnx = pg.connect(**creds)
     cursor = cnx.cursor()
     
-    # get the vehicles data
-    url = 'http://restbus.info/api/agencies/sf-muni/vehicles'
-    r = requests.get(url)
     
-    # store api response in a dataframe for convenience
-    df = pd.DataFrame.from_dict(r.json())
+    url = 'http://restbus.info/api/agencies/sf-muni/vehicles'
+    retries = 0
+    df = []
+
+    # Occasionally the API doesn't respond fast enough and returns an empty
+    # JSON response "[]".  This tries again automatically up to 5 times.
+    while len(df) == 0 and retries < 5:
+        retries += 1
+
+        # get the vehicle location data from the API, store it in a dataframe
+        r = requests.get(url)
+        df = pd.DataFrame.from_dict(r.json())
+
+    if len(df) == 0:
+        print(f"Empty response from restbus API after {retries} retries")
     
     # drop columns we aren't storing
     df = df.drop(['_links', 'predictable', 'leadingVehicleId'], axis=1)
