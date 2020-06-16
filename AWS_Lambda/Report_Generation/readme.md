@@ -8,7 +8,9 @@ The code is divided into 4 files:
 - `report_main.py` is the main file, and contains the function called by AWS Lambda
 - `report_test.py` can be used for local testing or updating past reports in case any updates are made to the process.  It does not need to be uploaded to AWS Lambda.
 
-The report generation process has several steps and goes through a lot of data, so it does take some time to get the report for an entire day.  As of now it takes about 4 minutes, but there is also fewer buses and bus routes running because of the stay-at-home orders.  We expect it will take about 3x as long once service returns to normal.  While we were able to optimize that some (the original un-optimized version took 20 minutes), there's definitely room for improvement.
+The report generation process has several steps and goes through a lot of data, so it does take some time to get the report for an entire day.  As of now it takes about 3 minutes on a local machine and about 6 on AWS Lambda.  There are also fewer buses and bus routes running because of the stay-at-home orders, so we expect it will take about 2-3x as long once service returns to normal.  While we were able to optimize some (the original un-optimized version took 20 minutes locally), there's definitely room for improvement.
+
+AWS Lambda has a 15 minute limit, so if this function starts to take longer than that we will have to find an alternative.  One option Labs 24 found was [AWS Step Functions](https://aws.amazon.com/step-functions/), which essentially lets you break up this process into multiple parts, but there was not enough time left in Labs to switch over to it then.
 
 The report structure itself is described in [report_data_structure.md](https://github.com/Lambda-School-Labs/sfmta-data-analysis-ds/blob/master/AWS_Lambda/Report_Generation/report_data_structure.md).
 
@@ -16,8 +18,8 @@ The report structure itself is described in [report_data_structure.md](https://g
 
 While this is meant to describe what the code is doing, it also gives a basic overview of our methodology.
 
-- Everything is started by calling `generate_report()` in `report_main.py`.  After loading the environment variables it needs, it runs a query to get all unique route id's that were active for the day.  It then calls `generate_route_report()` for each of those route id's, which does the following steps:
-	- First load the schedule, route definition, and bus location data for that route on that day.
+- Everything is started by calling `generate_report()` in `report_main.py`.  After loading the environment variables it needs, it loads all bus location data up-front.  It then calls `generate_route_report()` for each of the active routes, which does the following steps:
+	- Load the schedule and route definition for that route on that day.
 	- Run the `clean_locations()` function, which does several cleaning steps (see the docstring for those specifics), and most importantly finds the closest stop on the route to each location report.
 	- Use that info to generate a list of times that each bus was at each stop. ( `get_stop_times()` )
 	- Calculate bunches and gaps by analyzing those times.  If a stop did not see any buses for too long it was a gap, and any time two buses were too close to each other it was a bunch.  Also track the total number of time intervals measured so we can get the percentages. ( `get_bunches_gaps()` )
