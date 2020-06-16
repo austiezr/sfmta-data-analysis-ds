@@ -13,12 +13,11 @@ from math import sqrt, cos
 from scipy.spatial.distance import cdist
 
 
-def get_location_data(rid, date, connection):
+def load_locations(date, connection):
     """
-    Loads bus location data from the database for a single day
+    Loads all bus locations for the given date, returns a Dataframe
 
     Arguments:
-        rid (str): the route id to load
         date (str or Timestamp): the date to load data from
         connection (postgresql connection): the connection to the database
     """
@@ -32,9 +31,8 @@ def get_location_data(rid, date, connection):
     query = f"""
     SELECT *
     FROM locations
-    WHERE rid = '{rid}' AND
-        timestamp > '{begin}'::TIMESTAMP AND
-        timestamp < '{end}'::TIMESTAMP
+    WHERE timestamp > '{begin}'::TIMESTAMP AND
+          timestamp < '{end}'::TIMESTAMP
     ORDER BY id;
     """
 
@@ -42,7 +40,7 @@ def get_location_data(rid, date, connection):
     locations = sqlio.read_sql_query(query, connection)
 
     if len(locations) == 0:
-        raise Exception(f"No bus location data found for route {rid} between",
+        raise Exception(f"No bus location data found between",
                         f"{begin} and {end} (UTC)")
 
     # Convert those UTC timestamps to local PST by subtracting 7 hours
@@ -553,7 +551,7 @@ def get_active_routes(date, cursor):
     return [result[0] for result in cursor.fetchall()]
 
 
-def generate_route_report(rid, date, connection):
+def generate_route_report(rid, date, connection, locations):
     """
     Generates a daily report for a single route
 
@@ -561,6 +559,7 @@ def generate_route_report(rid, date, connection):
         rid (str): the route id to generate a report for
         date (str or pd.Datetime): the date to generate a report for
         connection (psycopg2 connection): the connection to the database
+        locations (Dataframe): the pre-loaded location data
 
     returns a dict of the report info
     """
@@ -568,7 +567,6 @@ def generate_route_report(rid, date, connection):
     # Load schedule, route, and location data
     schedule = Schedule(rid, date, connection)
     route = Route(rid, date, connection)
-    locations = get_location_data(rid, date, connection)
 
     # Apply cleaning function (this usually takes 1-2 minutes)
     locations = clean_locations(locations, route.stops_table)
