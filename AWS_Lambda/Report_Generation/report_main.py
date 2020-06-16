@@ -51,8 +51,12 @@ def generate_report(event, context, date='yesterday', new_report=True):
     cnx = pg.connect(**creds)
     cursor = cnx.cursor()
 
-    # get all active routes
-    route_ids = func.get_active_routes(date, cursor)
+    # Load all location info
+    all_locations = func.load_locations(date, cnx)
+    print("Location reports for the day:", len(all_locations))
+
+    # Get list of active routes
+    route_ids = list(all_locations['rid'].unique())
     route_ids.sort()
     print(f"Found {len(route_ids)} active routes")
 
@@ -62,7 +66,8 @@ def generate_report(event, context, date='yesterday', new_report=True):
     for rid in route_ids:
         try:
             print(f"Generating report for route {rid}...")
-            all_reports.append(func.generate_route_report(rid, date, cnx))
+            loc = all_locations[all_locations['rid'] == rid]
+            all_reports.append(func.generate_route_report(rid, date, cnx, loc))
         except KeyboardInterrupt:
             # if a user wants to stop this early
             print("Keyboard interrupt, quitting")
