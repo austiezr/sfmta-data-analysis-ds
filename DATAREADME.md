@@ -4,6 +4,7 @@
 - Fill out Stop Attributes
 - Fill out Vehicle Report Attributes
 - Flesh out notes on service types?
+- Link to DB Schema (when complete)
 
 ## Notes On Data Collection And Use
 
