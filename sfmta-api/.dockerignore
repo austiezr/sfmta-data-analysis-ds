@@ -4,3 +4,4 @@
 .gitignore
 .env
 .ipynb_checkpoints/
+/TODO.md

@@ -8,19 +8,39 @@ Currently this API isn't used in production, but serves as a quick and easy vehi
 for the DS team. Eventually API will be used in production app very rarely, to generate custom reports outside of our\
 storage window. See TODO [here][TODO].
 
-05/20 - Folder also contains Dockerfile and requirements.txt for Elastic Beanstalk deployment via docker.
-06/15 - Also includes the schedule package (implemented) and routes package (not implemented) to facilitate handling/
+05/20 - Folder also contains Dockerfile and requirements.txt for Elastic Beanstalk deployment via docker.\
+06/15 - Also includes the schedule package (implemented) and routes package (not implemented) to facilitate handling\
 schedule and route data, as well as a brief TODO.
 
 ## Endpoints
 
-- / - returns "Hello there!" - used to test successful deployment
-- /test - returns head of locations table - used to test DB connection
-- /system-real-time - returns 100 most recent entries in locations, human readable - used for testing, no longer needed
-- /system-real-time-json - same as above, machine readable
-- /daily-general-json, method=['GET'] - full data from given date, used by DS team for exploratory work and testing
-- /daily-route-json, method=['GET'] - full data for given date and route, used as above
-- /get-route-info, methods=['GET'] - schedule info for specified route and date, used as above
+### Usable for exploratory work and prototyping
+
+- /daily-general-json, method=['GET']
+  - Expects date as string: YYYY-MM-DD, defaults to previous day if none given
+  - full locations data from given date
+- /daily-route-json, method=['GET']
+  - Expects date as string: YYYY-MM-DD, defaults to previous day if none given
+  - Expects route as route id as string, defaults to '1' (california-1 line) if none given
+  - full locations data for given date and route
+- /get-route-info, methods=['GET'] 
+  - Expects date as string: YYYY-MM-DD, defaults to previous day if none given
+  - Expects route as route id as string, defaults to '1' (california-1 line) if none given
+  - schedule info for specified route and date, used as above
+
+### Mainly used for testing
+
+- / 
+  - returns "Hello there!" 
+  - used to quickly test successful deployment
+- /test 
+  - returns head of locations table 
+  - used to quickly test DB connection
+- /system-real-time 
+  - returns 100 most recent entries in locations, human readable 
+  - previously used for testing, no longer needed
+- /system-real-time-json 
+  - same as above, machine readable
 
 # For Future Cohorts, With Love From Labs 24:
 
