@@ -1,8 +1,5 @@
 # DataReadme TODO: 
 
-- Update Route Attributes to reflect what we're currently collecting and using
-- Fill out Stop Attributes
-- Fill out Vehicle Report Attributes
 - Flesh out notes on service types?
 - Link to DB Schema (when complete)
 
@@ -113,4 +110,4 @@ Three main lines; they run above ground and schedules remain relatively static. 
 [restbus]: http://restbus.info/
 [db]: https://raw.githubusercontent.com/Lambda-School-Labs/sfmta-data-analysis-ds/master/images/architecture_diagram.png
 [readme]: README.md
-[reports]: https://docs.google.com/document/d/1smm36XbC7Yat-H9ex3SRWkMBuOjVXly01e9Al5PEMcQ/edit?usp=sharing
+[reports]: https://github.com/Lambda-School-Labs/sfmta-data-analysis-ds/blob/master/AWS_Lambda/Report_Generation/report_data_structure.md
