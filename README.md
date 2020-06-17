@@ -37,6 +37,14 @@ further information on accessing and maintaining the API can be found [here][api
 
 [The Front End][live]
 
+### Architecture
+
+![architecture diagram](https://raw.githubusercontent.com/Lambda-School-Labs/sfmta-data-analysis-ds/master/images/architecture_diagram.png)
+
+The current architecture uses AWS Lambda functions to continually store data in our database, which is also hosted on AWS.  Another AWS Lambda function reads data from the database, generates a daily report, and saves the report back to the database.  The web back end connects to the database directly to get those reports, and passes them to the front end to display them.
+
+We also have a working Flask app, but it is currently only used for testing purposes and the web team does not connect to it themselves.  This could be used for other functionality in the future, such as requesting custom reports.
+
 ### Tech Stack
 
 - [Python][python]
