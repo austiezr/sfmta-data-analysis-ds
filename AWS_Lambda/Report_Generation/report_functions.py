@@ -629,9 +629,10 @@ def generate_route_report(rid, date, connection, locations):
             {
                 'route_id': rid,
                 'route_name': route.route_name,
-                'bunches': bunches,
-                'gaps': gaps,
-                'on-time': float(round(on_time * 100, 2)),
+                'overall_health': float(round(health * 100, 2)),
+                'bunched_percentage': round(bunches/intervals*100, 2),
+                'gapped_percengage': round(gaps/intervals*100, 2),
+                'on_time_percentage': float(round(on_time * 100, 2)),
                 'coverage': float(round(coverage * 100, 2))
             }
         ],
@@ -732,9 +733,10 @@ def calculate_aggregate_report(all_reports):
                 {
                     'route_id': t,
                     'route_name': t,
-                    'bunches': n_bunches,
-                    'gaps': n_gaps,
-                    'on-time': float(round(on_time_perc, 2)),
+                    'overall_health': float(round(health*100, 2)),
+                    'bunched_percentage': round(n_bunches/n_intervals*100, 2),
+                    'gapped_percentage': round(n_gaps/n_intervals*100, 2),
+                    'on_time_percentage': float(round(on_time_perc, 2)),
                     'coverage': float(round(coverage, 2))
                 }
             ],

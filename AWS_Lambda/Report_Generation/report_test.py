@@ -44,9 +44,9 @@ def download_report(date):
 
 
 if __name__ == "__main__":
-    # Used this code to back-fill reports we had not generated yet, ran locally
-    begin = pd.to_datetime('2020-6-14')
-    end = pd.to_datetime('2020-6-14')
+    # Used this code to update past reports with new changes, ran locally
+    begin = pd.to_datetime('2020-5-21')
+    end = pd.to_datetime('2020-6-15')
 
     while begin <= end:
         start_time = time.time()

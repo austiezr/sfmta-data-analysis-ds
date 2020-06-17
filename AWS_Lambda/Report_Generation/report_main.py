@@ -34,7 +34,7 @@ def generate_report(event, context, date='yesterday', new_report=True):
     if date == 'yesterday':
         # actually get a timestamp for yesterday
         date = pd.to_datetime('today') - pd.Timedelta(days=1)
-        date = date.replace(hour=0, minute=0, second=0)
+        date = date.replace(hour=0, minute=0, second=0, microsecond=0)
     else:
         date = pd.to_datetime(date)
 
