@@ -4,7 +4,6 @@
 - Fill out Stop Attributes
 - Fill out Vehicle Report Attributes
 - Flesh out notes on service types?
-- Link to DB Schema (when complete)
 
 ## Notes On Data Collection And Use
 
@@ -12,6 +11,8 @@ Data points are collected by [NextBus][nextbus] in collaboration with SFMTA.\
 We are accessing this data through the [RestBus API][restbus].
 
 SFMTA's mission statement is provided [here][mission].
+
+A diagram of our DB architecture is available [here][db], as well as in the [main README][readme].
 
 ## Outline of Available Data
 
@@ -58,3 +59,5 @@ Three main lines; they run above ground and schedules remain relatively static. 
 [nextbus]: https://www.nextbus.com/
 [mission]: https://www.sfmta.com/about-us/sfmta-strategic-plan/mission-vision
 [restbus]: http://restbus.info/
+[db]: https://raw.githubusercontent.com/Lambda-School-Labs/sfmta-data-analysis-ds/master/images/architecture_diagram.png
+[readme]: README.md
