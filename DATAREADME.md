@@ -35,6 +35,7 @@ Previous route definitions are maintained for accurate use of historic data.
 - content
   - JSON containing sfmta's definition of that route at that time
     - includes location data for all stops on that route as well as lat/lon definitions of the segments that make up the actual route
+    - live API source: http://webservices.nextbus.com/service/publicJSONFeed?command=routeConfig&a=sf-muni&r=1
 
 ### Schedules Attributes:
 
@@ -53,8 +54,11 @@ Previous schedules are maintained for accurate use of historic data.
   - JSON containing sfmta's schedule for that route at that time
   - includes list of scheduled stops for that route, with timestamps for scheduled service
   - includes schedules for several different classes of service based on day of week, time of day
+  - live API source: http://webservices.nextbus.com/service/publicJSONFeed?command=schedule&a=sf-muni&r=1
 
 ### Locations Attributes:
+
+Live API source: http://restbus.info/api/agencies/sf-muni/vehicles
 
 - timestamp
   - time of vehicle report collection in UTC
