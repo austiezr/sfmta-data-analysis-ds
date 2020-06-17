@@ -25,9 +25,10 @@ This document describes the data structure of the daily reports. Below is an exa
 		    {
 			    "route_id": "All",
 			    "route_name": "All",
-			    "bunches": 9517,
-			    "gaps": 43809,
-			    "on-time": 42.54,
+				"overall_health": 63.41,
+			    "bunched_percentage": 12.62,
+			    "gapped_percentage": 38.42,
+			    "on_time_percentage": 42.54,
 			    "coverage": 42.8
 		    }, ...
 	    ],
