@@ -1,4 +1,4 @@
-### Data Files
+## Data Files
 
 - dropdown.txt
   - a collection of routes containing lists for type, name, and id
@@ -37,3 +37,26 @@
   - same as jordan-sfmta-api/stop_data.csv
 - temp.json
   - list of lat/lon coordinates
+
+## Additional Data
+
+Labs 22 had their own data stored in a MySQL database.  That was taken down by Labs 24 for two reasons: Labs requirements said to use PostgreSQL instead, and the data itself was incomplete.  The bus location data had gaps where entire days were not recorded, and schedules or route definitions were not stored at all, so Labs 24 could not use it when making the daily reports.
+
+Since the database was taken down and the data files were too large to upload to github, we have uploaded the data to a google drive under SFMTALAMBDA@gmail.com.  Your team lead should have credentials for that if you need to access it.
+
+That database had three tables:
+
+- location
+  - This was bus location data the Labs 22 team collected themselves, with a similar schema to the one currently used in the production database.
+  - It contains data between 4/13 and 4/30 (12 out of 18 days)
+  - CSV (~740k rows, 77 MB): https://drive.google.com/file/d/1gzL29wYU_CIYeC1p4aKDBfzBL3XWuVJr/view?usp=sharing
+- historic_location
+  - This table had bus locations collected before Labs 22, we assume Jarie collected it.  It uses the exact same schema as the location table.
+  - It contains data between 1/20 and 4/13 (47 out of 84 days)
+  - CSV (~15 million rows, 2 GB): https://drive.google.com/file/d/1rRh5qm9NJO6szg8Mvo6lD4fWRNpbQnCP/view?usp=sharing
+- historic_location_stops
+  - This table contained a subset of the historic_location data, with added columns for stop_id, stop_lat, and stop_lon.
+  - We believe this was part of the calculations when trying to match up bus locations to stops on their route, but we did not find anything else that used this data.
+  - CSV (~3.3 million rows, 406 MB): https://drive.google.com/file/d/1umyr7Es8XcdmHjDyc_1xuF-reKi2V7-K/view?usp=sharing
+
+Lastly, there is also a .sql dump file of the entire database.  If you have MySQL installed, this can be used to restore the database itself.  It is also 2 GB: https://drive.google.com/file/d/1Bk5JIZuvZGMrIZdO-xsQNZ0LpJjXMk5s/view?usp=sharing
