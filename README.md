@@ -1,3 +1,8 @@
+### README TODO:
+
+- how-to:
+  - onboard to AWS
+
 # SFMTA Data Analysis
 
 Take a look at our product [here!][live]
@@ -75,13 +80,6 @@ service disruptions, etc.
 Our primary source of data is [NextBus][nextbus], via the [RestBus API][restbus]. This data consists of route and\
 schedule data made available by SFMTA, as well as detailed vehicle-level data for every active vehicle in the SFMTA\
 system, every minute. A detailed breakdown of this data is available [here][data].
-
-### README TODO:
-
-- how-to:
-  - connect to the db
-  - onboard to AWS
-- update contributors
 
 ## Contributing
 
