@@ -6,7 +6,7 @@ There are currently four different functions deployed.  The location collector r
 
 - `storeAPIResponseInDatabase`
   - This function collectes the vehicle location data.
-  - The script here is location_collector.py.  The AWS function name isn't consistent with the others, but we learned after this one that it is not possible to rename AWS Lambda functions.
+  - The script here is location_collector.py.  The AWS function name isn't consistent with the others, since we learned after this one that it is not possible to rename AWS Lambda functions.
     - It pulls location data from this API route: http://restbus.info/api/agencies/sf-muni/vehicles
 - `routeCollector`
   - This function collects route definition data, including path coordinates and stop information.
