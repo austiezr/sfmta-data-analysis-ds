@@ -1,8 +1,3 @@
-### README TODO:
-
-- how-to:
-  - onboard to AWS
-
 # SFMTA Data Analysis
 
 Take a look at our product [here!][live]
