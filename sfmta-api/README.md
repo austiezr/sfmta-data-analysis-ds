@@ -94,7 +94,7 @@ and comparing to the instance id from above
 4) Save
 5) wait until your number of instances changes from 1 to 0
 
-Then from your command line, within the right directory, using the EB CLI: \
+Then from your command line, within the right directory, using the EB CLI:
 1) eb deploy
 2) wait in panicked silence until the deploy completes
 3) eb setenv USERNAME=whatever_username PASSWORD=whatever_password_is HOST=whatever_host_is DATABASE=whatever_db_is
