@@ -94,13 +94,13 @@ and comparing to the instance id from above
 4) Save
 5) wait until your number of instances changes from 1 to 0
 
-Then from your command line, within the right directory, using the EB CLI:\
+Then from your command line, within the right directory, using the EB CLI: \
 1) eb deploy
 2) wait in panicked silence until the deploy completes
 3) eb setenv USERNAME=whatever_username PASSWORD=whatever_password_is HOST=whatever_host_is DATABASE=whatever_db_is
 4) wait in panicked silence until the configuration completes
 
-Then back at [this link][EC2auto-scaling]:
+Then back at [this link][EC2 auto-scaling]:
 1) select the appropriate auto-scaling group; should be the only ASG with no instances
 2) Edit
 3) set Desired Capacity, Min, and Max to 1 (or from the command line: eb scale 1)
@@ -149,6 +149,7 @@ This will almost always break the environment and generally requires a full rebu
 [live-api]: http://ds.datadriventransit.org/
 [install]: https://github.com/aws/aws-elastic-beanstalk-cli-setup
 [use]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3.html
-[EC2auto-scaling]: https://console.aws.amazon.com/ec2/autoscaling/home?region=us-east-1#AutoScalingGroups:id=awseb-e-46ix3awcsk-stack-AWSEBAutoScalingGroup-241DU78KAD94;view=details
+[EC2 instances]: https://console.aws.amazon.com/ec2
+[EC2 auto-scaling]: https://console.aws.amazon.com/ec2/autoscaling/home?region=us-east-1#AutoScalingGroups:id=awseb-e-46ix3awcsk-stack-AWSEBAutoScalingGroup-241DU78KAD94;view=details
 [dash]: https://console.aws.amazon.com/elasticbeanstalk/home?region=us-east-1#/environment/dashboard?applicationName=sfmta-test&environmentId=e-46ix3awcsk
 [todo]: sfmta-data-analysis-ds/sfmta-api/TODO.md
